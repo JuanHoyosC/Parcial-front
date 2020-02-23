@@ -54,10 +54,7 @@ button.btn:hover {
 
 @media (max-width: 450px) { 
     .form {
-        background: white;
         width: 90%;
         padding: 16px;
-        border-radius: 5px;
-        box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
     }
 }
