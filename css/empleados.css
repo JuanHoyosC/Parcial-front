@@ -64,6 +64,7 @@ body {
     margin-right: auto;
     padding: 5px 15px 9px 15px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .btn-entrar:hover {

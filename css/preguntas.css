@@ -15,16 +15,66 @@ body {
     background: var(--background);
 }
 
-.form {
+.container-preguntas {
     background: white;
-    width: 360px;
+    width: 750px;
+    height: 500px;
     padding: 32px;
     border-radius: 5px;
     box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
+}
+
+.title {
+    margin-bottom: 32px;
+}
+
+.mb {
+    margin-bottom: 16px;
+}
+
+.pregunta {
+    margin-bottom: 32px;
+}
+
+.text-pregunta {
+    color: rgba(245, 30, 30, 0.884)
+}
+.respuesta {
+    margin-bottom: 5px;
+}
+
+.container-button {
+    width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-entrar {
+    display: block;
+    background-color: #3b74c0;
+    color: white;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 15px 9px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-entrar:hover {
+    background-color: #266dc9;
+    text-decoration: none;
 }
 
 
-
 @media (max-width: 450px) { 
-  
+    .container-preguntas {
+        width: 95%;
+        padding: 8px;
+    }
+
+    .container-button {
+        width: 70%;
+    }
 }
