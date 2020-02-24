@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: linear-gradient(90deg, #2b5876, #3b74c0);
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--background);
+}
+
+.form {
+    background: white;
+    width: 360px;
+    padding: 32px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+
+@media (max-width: 450px) { 
+  
+}
