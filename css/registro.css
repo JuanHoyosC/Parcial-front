@@ -1,0 +1,65 @@
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: linear-gradient(90deg, #2b5876, #3b74c0);
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--background);
+}
+
+.form {
+    background: white;
+    width: 520px;
+    padding: 32px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
+}
+
+.form-control {
+    padding: 8px 12px;
+}
+
+.label {
+    margin-bottom: 5px;
+}
+
+.form-group, .btn, .olvido, h1 {
+    margin-bottom: 32px;
+}
+
+.olvido:hover {
+    color: rgb(236, 113, 82);
+    cursor: pointer;
+}
+
+.btn-entrar {
+    display: block;
+    background-color: #3b74c0;
+    color: white;
+    width: 100%;
+    height: 38px;
+    padding: 5px 15px 9px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-entrar:hover {
+    background-color: #266dc9;
+    text-decoration: none;
+}
+
+@media (max-width: 450px) { 
+    .form {
+        width: 90%;
+        padding: 16px;
+    }
+}

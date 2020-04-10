@@ -11,6 +11,8 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link  rel="icon"   href="../imagenes/icono.png" type="image/png" />
     <link rel="stylesheet" href="./css/login.css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script> 
     <title>Login</title>
 </head>
 
@@ -20,14 +22,21 @@
         <h1 class="text-center text-secondary font-weight-lighter">Login</h1>
         <div class="form-group">
             <label class="label">Email</label>
-            <input type="email" class="form-control" aria-describedby="emailHelp">
+            <input type="email" class="form-control" aria-describedby="emailHelp" id ="email">
         </div>
         <div class="form-group">
             <label class="label">Contraseña</label>
-            <input type="password" class="form-control">
+            <input type="password" class="form-control" id ="password">
         </div>
-        <a class="text-center d-block olvido">¿Olvido su contraseña?</a>
-        <a  class="btn-entrar text-center text-white" href = "./html/empleados.html" >Entrar</a>
+        <div class="row">
+            <div class="col-lg-8">
+                <a class="text-center d-block olvido">¿Olvido su contraseña?</a>
+            </div>
+            <div class="col-lg-4">
+                <a class="text-center d-block olvido" href="./html/registro.html">Registrarse</a>
+            </div>
+        </div>
+        <input type="button" value="Entrar" onclick="verificar()" class="btn-entrar text-center text-white border-0">
     </form>
 
     <!-- Optional JavaScript -->
@@ -41,6 +50,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+
+        <script src="./js/login.js"></script>
 </body>
 
 </html>
