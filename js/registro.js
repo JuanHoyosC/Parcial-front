@@ -18,12 +18,30 @@ const obtenerDatos = () => {
 
     if (email.length == 0 || password.length == 0 || name.length == 0 || tipo.length == 0 || numDocumento.length == 0 ||
         nomEmpresa.length == 0 || telefono.length == 0) {
-        alert("No debe dejar campos vacio");
+        
+
+        Swal.fire({
+            title: 'Informacion incompleta',
+            text: "Debe llenar todos los campos",
+            icon: 'warning',
+            
+          })
+
+
+
     } else {
         const data = arrayJson(nomEmpresa, tipo, numDocumento, email, nomEmpresa, telefono, contraseña);
         db.collection("users").add(data)
             .then(function (docRef) {
-                alert("Usuario registrado");
+                Swal.fire({
+                
+                    icon: 'success',
+                    title: 'Registrado satisfactoriamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                    
+                  })
+                  
             })
             .catch(function (error) {
                 console.error("Error adding document: ", error);

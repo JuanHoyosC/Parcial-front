@@ -13,14 +13,19 @@ const verificar = () => {
   db.collection("users").onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       if (email == doc.data().email && password == doc.data().contraseña) {
-        window.location = "../html/empleados.html";
+        window.location = "html/empleados.html";
         verificar = true;
       }
 
     });
 
     if (!verificar) {
-      alert("Usuario o contraseña incorrecta");
+      Swal.fire({
+        icon: 'error',
+        title: 'Email o Contraseña incorrecta',
+        text: 'Intenta de nuevo',
+       
+      })
     }
     
   });
