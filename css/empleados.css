@@ -15,9 +15,11 @@ body {
 .main {
     background: white;
     width: 750px;
+    height: 650px;
     padding: 32px;
     border-radius: 5px;
     box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
 }
 
 .mb {

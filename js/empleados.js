@@ -1,82 +1,44 @@
-firebase.initializeApp({
-    apiKey: "AIzaSyBIWplHf1UW47MdtAxRq9sSm_OdxcQiKF4",
-    authDomain: "parcial-db.firebaseapp.com",
-    projectId: "parcial-db"
-  });
-  
-  const db = firebase.firestore();
-  
-  
-  
-  const verificar = () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    let verificar = false;
-    db.collection("users").onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        if (email == doc.data().email && password == doc.data().contraseña) {    
-          
-          localStorage.setItem('Nombre', doc.data().nomEmpresa);
-          localStorage.setItem('Id', doc.id);
-          // limpia los inputs
-          document.getElementById("email").value = "";
-          document.getElementById("password").value = "";
-          window.location = "html/empleados.html";
-          verificar = true;
-          
+
+db.collection("empleados").onSnapshot((querySnapshot) => {
+    const empresa = localStorage.getItem('Nombre');
+    var a=document.getElementById("lista");
+    while(a.hasChildNodes()){
+       a.removeChild(a.firstChild);	
+    }
+    querySnapshot.forEach((doc) => {
+        if (empresa == doc.data().empresa) {
+            console.log("sss")
+            // Se crean los div
+            let info = document.createElement("div");
+            let li = document.createElement("li");
+            let imagen = document.createElement("div");
+            let img = document.createElement("img");
+            
+            //Se crean las etiquetas p
+            let pName = document.createElement("p");
+            let pDIreccion = document.createElement("p");
+            
+            //Se añade el contenido a las etiquetas p
+            pName.innerHTML = doc.data().name;
+            pDIreccion.innerHTML = doc.data().direccion;
+            img.src ='../imagenes/user.png';
+            //Se añaden las clases a los elementos del dom
+            pName.classList.add('info-empleado');
+            pDIreccion.classList.add('info-empleado');
+            info.classList.add('col-8', 'col-lg-9', 'col-info');
+            imagen.classList.add('col-4', 'col-lg-3', 'col-img', 'pl-0');
+            img.classList.add('img-empleado');
+
+
+            li.classList.add('item-empleado', 'row',  'ml-0', 'mr-0');
+            info.appendChild(pName);
+            info.appendChild(pDIreccion);
+            imagen.appendChild(img);
+            li.appendChild(imagen);
+            li.appendChild(info);
+            // añade el elemento creado y su contenido al DOM 
+            var currentDiv = document.getElementById("lista");
+            currentDiv.appendChild(li);
         }
-  
-      });
-  
-      if (!verificar) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Email o Contraseña incorrecta',
-          text: 'Intenta de nuevo',
-         
-        })
-      }
-      
     });
-  
-  
-  }
-  
-  const vedddrificar = () =>{
-    const username = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    
-  
-    firebase.auth().signInWithEmailAndPassword(username, password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-  
-  });
-  firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-          firebase.auth().currentUser.getIdToken().then(function(idToken) {
-              localStorage.auth = idToken;
-              localStorage.uid = firebase.auth().currentUser.uid;
-  
-              uid = firebase.auth().currentUser.uid;
-              firebase.database().ref("users/" + uid).update({
-                  "name": $("#nameUser").val(),
-                  "status": "0",
-                  "uid": uid,
-                  "challenge": false,
-                  "statusChallenge": false
-              });
-          });
-          window.location = "html/empleados.html";
-      } else {
-          Swal.fire({
-              icon: 'error',
-              title: 'Usuario y/o contraseña son incorrectos',
-          });
-      }
-  });
-  
-  
-  }
-  
-  
+});

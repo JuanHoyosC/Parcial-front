@@ -5,16 +5,9 @@ if(nom == null){
 
 }
 if(nom != null){
-   op = true;
-    
+   op = true;   
 }
-console.log(op)
 
-if(op==true){
-
-
-
-}
 
 firebase.initializeApp({
     apiKey: "AIzaSyBIWplHf1UW47MdtAxRq9sSm_OdxcQiKF4",
