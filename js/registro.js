@@ -1,3 +1,21 @@
+const nom = localStorage.getItem("Nombre");
+var op = false;
+if(nom == null){
+    op = false;
+
+}
+if(nom != null){
+   op = true;
+    
+}
+console.log(op)
+
+
+if(op==true){
+nomEmpresa.disabled = true;
+nomEmpresa.value = nom;
+}
+
 firebase.initializeApp({
     apiKey: "AIzaSyBIWplHf1UW47MdtAxRq9sSm_OdxcQiKF4",
     authDomain: "parcial-db.firebaseapp.com",
@@ -31,7 +49,8 @@ const obtenerDatos = () => {
 
     } else {
         const data = arrayJson(nomEmpresa, tipo, numDocumento, email, nomEmpresa, telefono, contraseña);
-        db.collection("users").add(data)
+        if(op == false){
+            db.collection("users").add(data)
             .then(function (docRef) {
                 Swal.fire({
                 
@@ -46,6 +65,26 @@ const obtenerDatos = () => {
             .catch(function (error) {
                 console.error("Error adding document: ", error);
             });
+
+        }else{
+            db.collection("operadores").add(data)
+            .then(function (docRef) {
+                Swal.fire({
+                
+                    icon: 'success',
+                    title: 'Registrado satisfactoriamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                    
+                  })
+                  
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
+
+        }
+        
     }
 }
 
@@ -61,3 +100,8 @@ const arrayJson = (name, tipo, numDocumento, email, nomEmpresa, telefono, contra
     }
     return data;
 }
+
+
+
+
+ 
