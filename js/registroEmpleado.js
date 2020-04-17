@@ -25,12 +25,12 @@ firebase.initializeApp({
 const db = firebase.firestore();
 
 const obtenerDatos = () => {
-    const contraseña = document.getElementById("password").value;
-    const name = document.getElementById("name").value;
+    const contraseña = document.getElementById("passwordEmpleado").value;
+    const name = document.getElementById("nameEmpleado").value;
     const direccion = document.getElementById("direccion").value;
 
 
-    if (direccion.length == 0 || password.length == 0 || name.length == 0) {
+    if (direccion.length == 0 || contraseña.length == 0 || name.length == 0) {
         
 
         Swal.fire({
@@ -40,14 +40,10 @@ const obtenerDatos = () => {
             
           })
     } else {
-        firebase.auth().createUserWithEmailAndPassword(email, contraseña).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);
-        });
-        const data = arrayJson(nomEmpresa, tipo, numDocumento, email, nomEmpresa, telefono, contraseña);
-        db.collection("users").add(data)
+
+        const empresa = localStorage.getItem("Nombre");
+        const data = arrayJson(name, contraseña, direccion, empresa, "empleado", "activo");
+        db.collection("empleados").add(data)
             .then(function (docRef) {
                 Swal.fire({
                 
@@ -57,6 +53,11 @@ const obtenerDatos = () => {
                     timer: 1500
                     
                   })
+                  //Limpia los inputs
+                  document.getElementById("passwordEmpleado").value = "";
+                  document.getElementById("nameEmpleado").value = "";
+                  document.getElementById("direccion").value = "";
+
                   
             })
             .catch(function (error) {
@@ -65,15 +66,15 @@ const obtenerDatos = () => {
     }
 }
 
-const arrayJson = (name, tipo, numDocumento, email, nomEmpresa, telefono, contraseña) => {
+const arrayJson = (name, contraseña, direccion, empresa, tipo, estado) => {
     const data = {
         name: name,
+        direccion: direccion,
+        contraseña: contraseña,
+        empresa: empresa,
         tipo: tipo,
-        numDocumento: numDocumento,
-        email: email,
-        nomEmpresa: nomEmpresa,
-        telefono: telefono,
-        contraseña: contraseña
+        estad: estado
+        
     }
     return data;
 }

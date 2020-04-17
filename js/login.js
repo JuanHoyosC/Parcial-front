@@ -18,7 +18,9 @@ const verificar = () => {
         
         localStorage.setItem('Nombre', doc.data().nomEmpresa);
         localStorage.setItem('Id', doc.id);
-
+        // limpia los inputs
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
         window.location = "html/empleados.html";
         verificar = true;
         
@@ -77,5 +79,3 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 }
 
-
-console.log("dd")
