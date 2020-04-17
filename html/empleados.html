@@ -2,128 +2,169 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link  rel="icon"   href="../imagenes/icono.png" type="image/png" />
-    <link rel="stylesheet" href="../css/empleados.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="icon" href="../imagenes/icono.png" type="image/png" />
+  <link rel="stylesheet" href="../css/empleados.css">
 
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script> 
-    <title>Empleados</title>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+  <title>Empleados</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
-        <div class="" style="top: auto;" >
-          <a href="../index.html">
-          <img src="" style="width: 180px;">
-          <script>
-            const Empres = localStorage.getItem("Nombre");              
-              document.write(Empres.fontcolor("white"));
-          </script>
-          </a>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
+    <div class="" style="top: auto;">
+      <a href="../index.html">
+        <img src="" style="width: 180px;">
+        <script>
+          const Empres = localStorage.getItem("Nombre");
+          const id = localStorage.getItem("Id");
+          document.write(Empres.fontcolor("white"));
+          document.write(id.fontcolor("white"));
+        </script>
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+
+      <ul class="navbar-nav ml-auto">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalLong">
+          Registrar operador
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            
-          <ul class="navbar-nav ml-auto">
-            <a class="nav-link" href="../html/registro.html"> Registrar operador</a>
-          <li class="nav-item active">
-            <a class="nav-link" href="../index.html"> Log out</a>
-          </li>
-          
-          </ul>
-        </div>
-      </nav>
-    
 
-    <section class="main container">
-        <h1 class="text-center text-secondary font-weight-lighter mb"> Lista de empleados</h1>
-
-        <ul class="empleados mb  p-0">
-            <li class="item-empleado row  ml-0 mr-0">
-                <div class="col-4 col-lg-3  col-img pl-0"><img
-                        src="../imagenes/user0.jpg"
-                        class="img-empleado" alt=""></div>
-                <div class="col-8 col-lg-9 col-info">
-                    <p class="info-empleado">Pedro Ramirez</p>
-                    <p class="info-empleado">Operador de maquinas</p>
-                    <p class="info-empleado">29 años</p>
-                </div>
-            </li>
-
-            <li class="item-empleado row  ml-0 mr-0">
-                <div class="col-4 col-lg-3  col-img pl-0"><img src="../imagenes/user.png"
-                        class="img-empleado" alt=""></div>
-                <div class="col-8 col-lg-9 col-info">
-                    <p class="info-empleado">Laura Martinez</p>
-                    <p class="info-empleado">Ingeniera civil</p>
-                    <p class="info-empleado">32 años</p>
-                </div>
-            </li>
-
-            <li class="item-empleado row ml-0 mr-0">
-                <div class="col-4 col-lg-3  col-img  pl-0"><img
-                        src="../imagenes/user2.jpg"
-                        class="img-empleado" alt=""></div>
-                <div class="col-8 col-lg-9 col-info">
-                    <p class="info-empleado">Francisco Torres</p>
-                    <p class="info-empleado">Ingeniero civil</p>
-                    <p class="info-empleado">33 años</p>
-                </div>
-            </li>
-        </ul>
-
-        <div class="container-button">
-            <a  class="btn-entrar text-center text-white" href = "preguntas.html" >Continuar</a>
-        </div>
-    </section>
-    <br>
-    <br>
-
-    <footer class="footer mt-auto py-4 bg-dark text-light shadow">
-        <div class="container">
-            <div class="row align-items-center py-3 justify-content-around">
-            <div class="row mb-1">
-              <div class="logo" style="top: auto;" >
-                <a href="index.html">
-                <img src="../../../assets/fontico.png" style="width: 180px;" >
-                </a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrar empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              </div>            
-              <div>
-              <p class="mb-0">&copy; 2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+              <div class="modal-body">
+                <form class="form">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nombre del empleado" id="nameEmpleado">
+                  </div>
+
+                  <div class="form-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Direccion" id="direccion">
+                  </div>
+
+                  <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" id="passwordEmpleado">
+                  </div>
+                  <input type="button" value="Registrarse" onclick="obtenerDatos()"
+                    class="btn-entrar text-center text-white border-0 mb-3">
+                </form>
               </div>
             </div>
+          </div>
         </div>
-        </footer>
+        <li class="nav-item active">
+          <a class="nav-link" href="../index.html"> Log out</a>
+        </li>
 
-        <script>
-          
+      </ul>
+    </div>
+  </nav>
 
 
-        </script>
+  <section class="main container">
+    <h1 class="text-center text-secondary font-weight-lighter mb"> Lista de empleados</h1>
 
-    
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <ul class="empleados mb  p-0">
+      <li class="item-empleado row  ml-0 mr-0">
+        <div class="col-4 col-lg-3  col-img pl-0"><img src="../imagenes/user0.jpg" class="img-empleado" alt=""></div>
+        <div class="col-8 col-lg-9 col-info">
+          <p class="info-empleado">Pedro Ramirez</p>
+          <p class="info-empleado">Operador de maquinas</p>
+          <p class="info-empleado">29 años</p>
+        </div>
+      </li>
+
+      <li class="item-empleado row  ml-0 mr-0">
+        <div class="col-4 col-lg-3  col-img pl-0"><img src="../imagenes/user.png" class="img-empleado" alt=""></div>
+        <div class="col-8 col-lg-9 col-info">
+          <p class="info-empleado">Laura Martinez</p>
+          <p class="info-empleado">Ingeniera civil</p>
+          <p class="info-empleado">32 años</p>
+        </div>
+      </li>
+
+      <li class="item-empleado row ml-0 mr-0">
+        <div class="col-4 col-lg-3  col-img  pl-0"><img src="../imagenes/user2.jpg" class="img-empleado" alt=""></div>
+        <div class="col-8 col-lg-9 col-info">
+          <p class="info-empleado">Francisco Torres</p>
+          <p class="info-empleado">Ingeniero civil</p>
+          <p class="info-empleado">33 años</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="container-button">
+      <a class="btn-entrar text-center text-white" href="preguntas.html">Continuar</a>
+    </div>
+  </section>
+  <br>
+  <br>
+
+  <footer class="footer mt-auto py-4 bg-dark text-light shadow">
+    <div class="container">
+      <div class="row align-items-center py-3 justify-content-around">
+        <div class="row mb-1">
+          <div class="logo" style="top: auto;">
+            <a href="index.html">
+              <img src="../../../assets/fontico.png" style="width: 180px;">
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="mb-0">&copy; 2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+
+
+
+  </script>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
