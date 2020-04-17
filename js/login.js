@@ -13,8 +13,11 @@ const verificar = () => {
   db.collection("users").onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       if (email == doc.data().email && password == doc.data().contraseña) {
+        
+        localStorage.setItem('Nombre', doc.data().nomEmpresa);
         window.location = "html/empleados.html";
         verificar = true;
+        
       }
 
     });
