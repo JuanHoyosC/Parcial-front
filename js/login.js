@@ -28,7 +28,7 @@ const verificarEmpleado = (email, password) => {
     if (!verificar) {
       Swal.fire({
         icon: 'error',
-        title: 'Email o Contraseña incorrecta',
+        title: 'Usuario o Contraseña incorrecta',
         text: 'Intenta de nuevo',
 
       })
@@ -57,7 +57,7 @@ const verificarEmpresa = (email, password) => {
     if (!verificar) {
       Swal.fire({
         icon: 'error',
-        title: 'Email o Contraseña incorrecta',
+        title: 'Usuario o Contraseña incorrecta',
         text: 'Intenta de nuevo',
 
       })
