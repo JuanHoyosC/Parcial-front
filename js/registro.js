@@ -10,10 +10,10 @@ if(nom != null){
 }
 console.log(op)
 
-
 if(op==true){
-nomEmpresa.disabled = true;
-nomEmpresa.value = nom;
+
+
+
 }
 
 firebase.initializeApp({
@@ -44,13 +44,15 @@ const obtenerDatos = () => {
             icon: 'warning',
             
           })
-
-
-
     } else {
+        firebase.auth().createUserWithEmailAndPassword(email, contraseña).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+        });
         const data = arrayJson(nomEmpresa, tipo, numDocumento, email, nomEmpresa, telefono, contraseña);
-        if(op == false){
-            db.collection("users").add(data)
+        db.collection("users").add(data)
             .then(function (docRef) {
                 Swal.fire({
                 
@@ -65,26 +67,6 @@ const obtenerDatos = () => {
             .catch(function (error) {
                 console.error("Error adding document: ", error);
             });
-
-        }else{
-            db.collection("operadores").add(data)
-            .then(function (docRef) {
-                Swal.fire({
-                
-                    icon: 'success',
-                    title: 'Registrado satisfactoriamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                    
-                  })
-                  
-            })
-            .catch(function (error) {
-                console.error("Error adding document: ", error);
-            });
-
-        }
-        
     }
 }
 
