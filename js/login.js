@@ -30,8 +30,6 @@ const verificarEmpleado = (email, password) => {
 
     });
 
-    console.log(bloqueo)
-    console.log(verificar)
     if(bloqueo){
       Swal.fire({
         icon: 'error',
