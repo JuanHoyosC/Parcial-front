@@ -8,11 +8,12 @@ const db = firebase.firestore();
 
 const verificarEmpleado = (email, password) => {
    let verificar = false;
+   let bloqueo = false
   db.collection("empleados").onSnapshot((querySnapshot) => {
 
     querySnapshot.forEach((doc) => {
      
-      if (email == doc.data().name && password == doc.data().contraseña) {
+      if (email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "activo") {
 
         localStorage.setItem('Nombre', doc.data().name);
         localStorage.setItem('Id', doc.id);
@@ -23,15 +24,28 @@ const verificarEmpleado = (email, password) => {
         verificar = true;
       }
 
+      if(email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "desactivado"){
+        bloqueo = true
+      }
+
     });
 
-    if (!verificar) {
+    console.log(bloqueo)
+    console.log(verificar)
+    if(bloqueo){
       Swal.fire({
         icon: 'error',
-        title: 'Usuario o Contraseña incorrecta',
-        text: 'Intenta de nuevo',
-
+        title: 'Usuario bloqueado',
+        text: 'No puede ingresar al sistema',
       })
+    }else{
+      if (!verificar) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Usuario o Contraseña incorrecta',
+          text: 'Intenta de nuevo',
+        })
+      }
     }
 
   });
@@ -44,6 +58,7 @@ const verificarEmpresa = (email, password) => {
       if (email == doc.data().email && password == doc.data().contraseña) {
         localStorage.setItem('Nombre', doc.data().nomEmpresa);
         localStorage.setItem('Id', doc.id);
+        localStorage.setItem('Url', doc.data().url);
         // limpia los inputs
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
