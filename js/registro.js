@@ -24,10 +24,7 @@ const obtenerDatos = () => {
     const nomEmpresa = document.getElementById("nomEmpresa").value;
     const telefono = document.getElementById("telefono").value;
     
-    let file = document.getElementById("file").files[0];
-
-    
-    
+    let file = document.getElementById("file").files[0];   
     
 
 
@@ -46,15 +43,53 @@ const obtenerDatos = () => {
 
         firebase.auth().createUserWithEmailAndPassword(email, contraseña)
         .then(function(){
-            verificarGmail();
+         VerificarGmail();
+         firebase.auth().signInWithEmailAndPassword(email, contraseña).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                const storageRef = storage.ref('empresas/img/' + file.name);
+                const upload = storageRef.put(file);
+                uid = firebase.auth().currentUser.uid;
+                upload.on('state_changed', (snapshot) => {
+        
+                }, function (error) {
+                    console.log(error)
+                }, function () {
+                    upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                        url = downloadURL;
+                        const data = arrayJson(nomEmpresa, tipo, numDocumento, email, url, nomEmpresa, telefono, uid);
+                        db.collection("users").add(data)
+                            .then(function (docRef) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Registrado satisfactoriamente',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+        
+                                window.location = "preguntas.html";
+                            })
+                            .catch(function (error) {
+                                console.error("Error adding document: ", error);
+                            });
+                    });
+                });               
+            }else{
+                sw = false;
+            }
+        }); 
+
+
         })        
         
         .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(errorCode);
-            console.log(errorMessage);
-            
+            console.log(errorMessage);           
            
 
             if(errorCode == "auth/email-already-in-use"){
@@ -93,55 +128,11 @@ const obtenerDatos = () => {
             
         });
 
-        firebase.auth().signInWithEmailAndPassword(email, contraseña).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-        });
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                const storageRef = storage.ref('empresas/img/' + file.name);
-                const upload = storageRef.put(file);
-                uid = firebase.auth().currentUser.uid;
-                upload.on('state_changed', (snapshot) => {
-        
-                }, function (error) {
-                    console.log(error)
-                }, function () {
-                    upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                        url = downloadURL;
-                        const data = arrayJson(nomEmpresa, tipo, numDocumento, email, url, nomEmpresa, telefono, contraseña, uid);
-                        db.collection("users").add(data)
-                            .then(function (docRef) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Registrado satisfactoriamente',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-        
-                                window.location = "preguntas.html";
-                            })
-                            .catch(function (error) {
-                                console.error("Error adding document: ", error);
-                            });
-                    });
-                });
-
-
-               
-            }else{
-
-                sw = false;
-            }
-        });
-    
-        
-    }
-    
+                 
+    }    
 }
 
-const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, contraseña, uid) => {
+const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, uid) => {
     const data = {
         name: name,
         tipo: tipo,
@@ -150,19 +141,17 @@ const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, c
         url: url,
         nomEmpresa: nomEmpresa,
         telefono: telefono,
-        contraseña: contraseña,
         uid: uid
     }
     return data;
 }
-function verificarGmail(){
+function VerificarGmail(){
     var user = firebase.auth().currentUser;
-
-            user.sendEmailVerification().then(function() {
-                 // Email sent.
-            }).catch(function(error) {
-  // An error happened.
-            });
+    user.sendEmailVerification().then(function() {
+     // Email sent.
+    }).catch(function(error) {
+     // An error happened.
+    });    
 }
 
 

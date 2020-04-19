@@ -18,7 +18,7 @@ const verificarEmpleado = (email, password) => {
 
   db.collection("empleados").onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {     
-      if (email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "activo") {
+      if (email == doc.data().name && doc.data().estado == "activo") {
 
         localStorage.setItem('Nombre', doc.data().name);
         localStorage.setItem('Id', doc.id);
@@ -29,7 +29,7 @@ const verificarEmpleado = (email, password) => {
         verificar = true;
       }
 
-      if(email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "desactivado"){
+      if(email == doc.data().name && doc.data().estado == "desactivado"){
         bloqueo = true
       }
 
@@ -67,7 +67,6 @@ const verificarEmpresa = (email, password) => {
         document.getElementById("password").value = "";
         window.location = "html/empleados.html";
         verificar = true;
-
       }
 
     });
@@ -180,3 +179,12 @@ const vedddrificar = (username, password) => {
 
 }
 
+function PasswordReset(){
+  var auth = firebase.auth();
+  var emailAddress = "user@example.com";
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    // Email sent.
+  }).catch(function(error) {
+    // An error happened.
+  });
+}
