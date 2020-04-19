@@ -9,10 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link  rel="icon"   href="../imagenes/icono.png" type="image/png" />
+    <link rel="icon" href="../imagenes/icono.png" type="image/png" />
     <link rel="stylesheet" href="./css/login.css">
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>Login</title>
@@ -26,33 +26,45 @@
         <div class="row mb-3 text-center">
             <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
+                        checked>
                     <label class="form-check-label" for="gridRadios1">
-                      Empresa
+                        Empresa
                     </label>
-                  </div>
+                </div>
             </div>
             <div class="col">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
                     <label class="form-check-label" for="gridRadios2">
-                      Empleado
+                        Empleado
                     </label>
-                  </div>
+                </div>
             </div>
         </div>
         <div class="form-group">
-            <label class="label">Usuario</label>
-            <input type="text" class="form-control" aria-describedby="emailHelp" id ="email">
+            <label class="label">Correo electronico</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" id="email">
         </div>
         <div class="form-group">
             <label class="label">Contraseña</label>
-            <input type="password" class="form-control" id ="password">
+            <input type="password" class="form-control" id="password">
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <a class="text-center d-block olvido">¿Olvido su contraseña?</a>
-
+                <a class="text-center d-block olvido" href="#" data-toggle="modal" data-target="#exampleModal">¿Olvido
+                    su contraseña?</a>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content p-4">
+                            <h3 class ="text-center text-dark">Recuperar contraseña</h3>
+                            <label class="label ">Confirmar correo electronico</label>
+                            <input type="text" class="form-control " aria-describedby="emailHelp" id="email">
+                            <button type="button" class="btn btn-primary mt-3">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4">
                 <a class="text-center d-block olvido" href="./html/registro.html">Registrarse</a>
@@ -63,7 +75,7 @@
     <script>
         localStorage.clear();
     </script>
-<script src = "https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"> </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -77,7 +89,7 @@
         crossorigin="anonymous"></script>
 
 
-        <script src="./js/login.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 
 </html>
