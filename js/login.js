@@ -20,7 +20,7 @@ const verificarEmpleado = (email, password) => {
         // limpia los inputs
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
-        window.location = "html/preguntas.html";
+        window.location = "preguntas.html";
         verificar = true;
       }
 
