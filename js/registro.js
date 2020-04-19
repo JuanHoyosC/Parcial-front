@@ -60,7 +60,7 @@ const obtenerDatos = () => {
                 }, function () {
                     upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                         url = downloadURL;
-                        const data = arrayJson(nomEmpresa, tipo, numDocumento, email, url, nomEmpresa, telefono, uid);
+                        const data = arrayJson(nomEmpresa, tipo, numDocumento, email, url, nomEmpresa, telefono, contraseña, uid);
                         db.collection("users").add(data)
                             .then(function (docRef) {
                                 Swal.fire({
@@ -132,7 +132,7 @@ const obtenerDatos = () => {
     }    
 }
 
-const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, uid) => {
+const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono,contraseña, uid) => {
     const data = {
         name: name,
         tipo: tipo,
@@ -141,6 +141,7 @@ const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, u
         url: url,
         nomEmpresa: nomEmpresa,
         telefono: telefono,
+        contraseña: contraseña,
         uid: uid
     }
     return data;

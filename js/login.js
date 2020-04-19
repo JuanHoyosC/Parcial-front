@@ -18,7 +18,7 @@ const verificarEmpleado = (email, password) => {
 
   db.collection("empleados").onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {     
-      if (email == doc.data().name && doc.data().estado == "activo") {
+      if (email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "activo") {
 
         localStorage.setItem('Nombre', doc.data().name);
         localStorage.setItem('Id', doc.id);
@@ -100,7 +100,7 @@ const verificar = () => {
     vedddrificar(email, password);    
   }
   console.log(sw);
-  if(sw == true){
+  
     console.log("-----------")
   if(empresa == true){
     verificarEmpresa(email, password);
@@ -108,7 +108,7 @@ const verificar = () => {
   }else{
     verificarEmpleado(email, password);
   }
-}
+
 }
 
 const vedddrificar = (username, password) => {
@@ -117,16 +117,21 @@ const vedddrificar = (username, password) => {
   
 
 
-  firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
+  firebase.auth().signInWithEmailAndPassword(username, password)
+  .then(function(){
+    
+
+  })
+  .catch(function (error) {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode);
     console.log(errorMessage);
 
-    if(errorCode == "auth/email-already-in-use"){
+    if(errorCode == "auth/wrong-password"){
       Swal.fire({
           title: 'Espere',
-          text: "Correo electronico ya registrado",
+          text: "Contraseña incorrecta",
           icon: 'warning',        
       })
   }else{
@@ -145,10 +150,10 @@ const vedddrificar = (username, password) => {
                   icon: 'warning',                
               })
           }else{
-              if(errorCode == "auth/weak-password"){
+              if(errorCode == "auth/too-many-requests"){
                   Swal.fire({
                       title: 'Espere',
-                      text: "Contraseña no es segura",
+                      text: "Demasiados intentos de inicio de sesión fallidos. Por favor, inténtelo de nuevo más tarde.",
                       icon: 'warning',
           
                   })
@@ -163,6 +168,7 @@ const vedddrificar = (username, password) => {
     if (user) {
       console.log("Inicio Seccion")
       sw = true;     
+      
     } else {
      
     }
