@@ -1,7 +1,7 @@
 
 
 firebase.initializeApp({
-   
+
     apiKey: "AIzaSyBIWplHf1UW47MdtAxRq9sSm_OdxcQiKF4",
     authDomain: "parcial-db.firebaseapp.com",
     databaseURL: "https://parcial-db.firebaseio.com",
@@ -15,7 +15,7 @@ firebase.initializeApp({
 const db = firebase.firestore();
 const storage = firebase.storage();
 const obtenerDatos = () => {
-    
+
     const email = document.getElementById("email").value;
     const contraseña = document.getElementById("password").value;
     const name = document.getElementById("name").value;
@@ -23,9 +23,9 @@ const obtenerDatos = () => {
     const numDocumento = document.getElementById("numDocumento").value;
     const nomEmpresa = document.getElementById("nomEmpresa").value;
     const telefono = document.getElementById("telefono").value;
-    
-    let file = document.getElementById("file").files[0];   
-    
+
+    let file = document.getElementById("file").files[0];
+
 
 
 
@@ -42,97 +42,107 @@ const obtenerDatos = () => {
     } else {
 
         firebase.auth().createUserWithEmailAndPassword(email, contraseña)
-        .then(function(){
-         VerificarGmail();
-         firebase.auth().signInWithEmailAndPassword(email, contraseña).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-        });
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                const storageRef = storage.ref('empresas/img/' + file.name);
-                const upload = storageRef.put(file);
-                uid = firebase.auth().currentUser.uid;
-                upload.on('state_changed', (snapshot) => {
-        
-                }, function (error) {
-                    console.log(error)
-                }, function () {
-                    upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                        url = downloadURL;
-                        const data = arrayJson(nomEmpresa, tipo, numDocumento, email, url, nomEmpresa, telefono, contraseña, uid);
-                        db.collection("users").add(data)
-                            .then(function (docRef) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Registrado satisfactoriamente',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-        
-                                window.location = "preguntas.html";
-                            })
-                            .catch(function (error) {
-                                console.error("Error adding document: ", error);
+            .then(function () {
+                VerificarGmail();
+                firebase.auth().signInWithEmailAndPassword(email, contraseña).catch(function (error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                });
+                firebase.auth().onAuthStateChanged(function (user) {
+                    if (user) {
+                        const storageRef = storage.ref('empresas/img/' + file.name);
+                        const upload = storageRef.put(file);
+                        uid = firebase.auth().currentUser.uid;
+                        upload.on('state_changed', (snapshot) => {
+
+                        }, function (error) {
+                            console.log(error)
+                        }, function () {
+                            upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                                url = downloadURL;
+                                const data = arrayJson(nomEmpresa, tipo, numDocumento, email, url, nomEmpresa, telefono, contraseña, uid);
+                                db.collection("users").add(data)
+                                    .then(function (docRef) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Registrado satisfactoriamente',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                        limpiar();
+
+                                    })
+                                    .catch(function (error) {
+                                        console.error("Error adding document: ", error);
+                                    });
                             });
-                    });
-                });               
-            }else{
-                sw = false;
-            }
-        }); 
+                        });
+                    } else {
+                        sw = false;
+                    }
+                });
 
 
-        })        
-        
-        .catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode);
-            console.log(errorMessage);           
-           
+            })
 
-            if(errorCode == "auth/email-already-in-use"){
-                Swal.fire({
-                    title: 'Espere',
-                    text: "Correo electronico ya registrado",
-                    icon: 'warning',        
-                })
-            }else{
-                if(errorCode == "auth/invalid-email"){
+            .catch(function (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+
+
+                if (errorCode == "auth/email-already-in-use") {
                     Swal.fire({
                         title: 'Espere',
-                        text: "Correo electronico incorrecto",
-                        icon: 'warning',            
+                        text: "Correo electronico ya registrado",
+                        icon: 'warning',
                     })
-
-                }else{
-                    if(errorCode == "auth/operation-not-allowed"){                        
+                } else {
+                    if (errorCode == "auth/invalid-email") {
                         Swal.fire({
                             title: 'Espere',
-                            text: "Correo electronico inhabilitado",
-                            icon: 'warning',                
+                            text: "Correo electronico incorrecto",
+                            icon: 'warning',
                         })
-                    }else{
-                        if(errorCode == "auth/weak-password"){
+
+                    } else {
+                        if (errorCode == "auth/operation-not-allowed") {
                             Swal.fire({
                                 title: 'Espere',
-                                text: "Contraseña no es segura",
+                                text: "Correo electronico inhabilitado",
                                 icon: 'warning',
-                    
                             })
+                        } else {
+                            if (errorCode == "auth/weak-password") {
+                                Swal.fire({
+                                    title: 'Espere',
+                                    text: "Contraseña no es segura",
+                                    icon: 'warning',
+
+                                })
+                            }
                         }
                     }
-                }    
-            }          
-            
-        });
+                }
 
-                 
-    }    
+            });
+
+
+    }
 }
 
-const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono,contraseña, uid) => {
+const limpiar = () => {
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("tipo").value = "";
+    document.getElementById("numDocumento").value = "";
+    document.getElementById("nomEmpresa").value = "";
+    document.getElementById("telefono").value = "";
+}
+
+const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, contraseña, uid) => {
     const data = {
         name: name,
         tipo: tipo,
@@ -146,13 +156,13 @@ const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono,co
     }
     return data;
 }
-function VerificarGmail(){
+function VerificarGmail() {
     var user = firebase.auth().currentUser;
-    user.sendEmailVerification().then(function() {
-     // Email sent.
-    }).catch(function(error) {
-     // An error happened.
-    });    
+    user.sendEmailVerification().then(function () {
+        // Email sent.
+    }).catch(function (error) {
+        // An error happened.
+    });
 }
 
 
