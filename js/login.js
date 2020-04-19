@@ -18,7 +18,7 @@ const verificarEmpleado = (email, password) => {
 
   db.collection("empleados").onSnapshot((querySnapshot) => {
     querySnapshot.forEach((doc) => {     
-      if (email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "activo") {
+      if (email == doc.data().email && password == doc.data().contraseña && doc.data().estado == "activo") {
 
         localStorage.setItem('Nombre', doc.data().name);
         localStorage.setItem('Id', doc.id);
@@ -29,7 +29,7 @@ const verificarEmpleado = (email, password) => {
         verificar = true;
       }
 
-      if(email == doc.data().name && doc.data().estado == "desactivado"){
+      if(email == doc.data().email && doc.data().estado == "desactivado"){
         bloqueo = true
       }
 

@@ -1,13 +1,4 @@
 const nom = localStorage.getItem("Nombre");
-var op = false;
-if (nom == null) {
-    op = false;
-
-}
-if (nom != null) {
-    op = true;
-}
-
 
 
 var config = {
@@ -25,6 +16,7 @@ const storage = firebase.storage();
 const obtenerDatos = () => {
     const contraseña = document.getElementById("passwordEmpleado").value;
     const name = document.getElementById("nameEmpleado").value;
+    const email = document.getElementById("email").value;
     const direccion = document.getElementById("direccion").value;
     let file = document.getElementById("file").files[0];
     
@@ -48,7 +40,7 @@ const obtenerDatos = () => {
             upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                 url = downloadURL;
                 const empresa = localStorage.getItem("Nombre");
-                const data = arrayJson(name, url, contraseña, direccion, empresa, "empleado", "activo");
+                const data = arrayJson(name, email, url, contraseña, direccion, empresa, "empleado", "activo");
                 db.collection("empleados").add(data)
                     .then(function (docRef) {
                         Swal.fire({
@@ -76,9 +68,10 @@ const obtenerDatos = () => {
     }
 }
 
-const arrayJson = (name, url, contraseña, direccion, empresa, tipo, estado) => {
+const arrayJson = (name, email, url, contraseña, direccion, empresa, tipo, estado) => {
     const data = {
         name: name,
+        email: email,
         url: url,
         direccion: direccion,
         contraseña: contraseña,
