@@ -25,7 +25,7 @@ const crearPreguntas = () => {
 
         })
     } else {
-        const uid = localStorage.getItem('Id')
+        const uid = localStorage.getItem('IdEmpresa')
         const data = array(pregunta1, pregunta2, pregunta3, pregunta4, pregunta5, 
             valor1, valor2, valor3, valor4, valor5, uid);
         db.collection("Preguntas").add(data)

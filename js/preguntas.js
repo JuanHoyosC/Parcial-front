@@ -1,4 +1,9 @@
 const preguntas = document.getElementById('preguntas');
+
+//Impide que entren a la pagina si no estan logueados
+if(localStorage.getItem('IdEmpresa') == null || localStorage.getItem('IdUser') == null){
+    window.location = "../../index.html";
+}
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
 var config = {
@@ -14,7 +19,7 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 db.collection("Preguntas").onSnapshot((querySnapshot) => {
-    const Id = localStorage.getItem('Id');
+    const Id = localStorage.getItem('IdEmpresa');
 
     querySnapshot.forEach((doc) => {
         if (Id == doc.data().uidEmpresa) {
@@ -62,7 +67,7 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
     });
 });
 
-const responder = () =>{
+const responder = () => {
     const respuesta1 = document.getElementById("respuesta1").value;
     const respuesta2 = document.getElementById("respuesta2").value;
     const respuesta3 = document.getElementById("respuesta3").value;
@@ -78,5 +83,38 @@ const responder = () =>{
             icon: 'warning',
 
         })
+    } else {
+        const uidUser = localStorage.getItem('IdUser')
+        const uidEmpresa = localStorage.getItem('IdEmpresa')
+        const data = (respuesta1, respuesta2, respuesta3, respuesta4, respuesta5, uidEmpresa, uidUser);
+        db.collection("respuestas").add(data)
+            .then(function (docRef) {
+                Swal.fire({
+
+                    icon: 'success',
+                    title: 'Respuestas registradas',
+                    showConfirmButton: false,
+                    timer: 1500
+
+                })
+                window.location = "resultado.html";
+
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
     }
+}
+
+const arrayRespuestas = (respuesta1, respuesta2, respuesta3, respuesta4, respuesta5, uid, uidUser) => {
+    const data = {
+        respuesta1: respuesta1,
+        respuesta2: respuesta2,
+        respuesta3: respuesta3,
+        respuesta4: respuesta4,
+        respuesta5: respuesta5,
+        uidEmpresa: uid,
+        uidUsuario: uidUser
+    }
+    return data;
 }

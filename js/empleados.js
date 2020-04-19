@@ -1,14 +1,19 @@
 
+//Impiden que no entren a la pagina si no estan logueados
+if(localStorage.getItem('IdEmpresa') == null){
+    window.location = "../../index.html";
+}
+  
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
 db.collection("empleados").onSnapshot((querySnapshot) => {
-    const empresa = localStorage.getItem('Nombre');
+    const uidEmpresa = localStorage.getItem('IdEmpresa');
     var a = document.getElementById("lista");
     while (a.hasChildNodes()) {
         a.removeChild(a.firstChild);
     }
     querySnapshot.forEach((doc) => {
-        if (empresa == doc.data().empresa) {
+        if (uidEmpresa == doc.data().uidEmpresa) {
             // Se crean los div
             let info = document.createElement("div");
             let li = document.createElement("li");

@@ -156,6 +156,7 @@ const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, c
     }
     return data;
 }
+
 function VerificarGmail() {
     var user = firebase.auth().currentUser;
     user.sendEmailVerification().then(function () {

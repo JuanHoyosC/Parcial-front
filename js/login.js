@@ -9,6 +9,15 @@ firebase.initializeApp({
   measurementId: "G-5SPHRL79PH"
 });
 
+console.log(localStorage.getItem('IdEmpresa'))
+if(localStorage.getItem('IdUser') != null){
+  window.location = "html/preguntas.html";
+}else{
+  if(localStorage.getItem('IdEmpresa') != null){
+    window.location = "html/empleados.html";
+  }
+}
+
 const db = firebase.firestore();
 var sw = false;
 
@@ -21,11 +30,13 @@ const verificarEmpleado = (email, password) => {
       if (email == doc.data().email && password == doc.data().contraseña && doc.data().estado == "activo") {
 
         localStorage.setItem('Nombre', doc.data().name);
-        localStorage.setItem('Id', doc.id);
+        localStorage.setItem('IdUser', doc.data().uidEmpleado);
+        localStorage.setItem('IdEmpresa', doc.data().uidEmpresa);
+        localStorage.setItem('Url', doc.data().url);
         // limpia los inputs
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
-        window.location = "preguntas.html";
+        window.location = "html/preguntas.html";
         verificar = true;
       }
 
@@ -60,7 +71,7 @@ const verificarEmpresa = (email, password) => {
     querySnapshot.forEach((doc) => {
       if (email == doc.data().email && password == doc.data().contraseña) {
         localStorage.setItem('Nombre', doc.data().nomEmpresa);
-        localStorage.setItem('Id', doc.data().uid);
+        localStorage.setItem('IdEmpresa', doc.data().uid);
         localStorage.setItem('Url', doc.data().url);
         // limpia los inputs
         document.getElementById("email").value = "";
