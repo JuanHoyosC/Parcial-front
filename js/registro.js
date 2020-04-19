@@ -44,7 +44,12 @@ const obtenerDatos = () => {
         })
     } else {
 
-        firebase.auth().createUserWithEmailAndPassword(email, contraseña).catch(function (error) {
+        firebase.auth().createUserWithEmailAndPassword(email, contraseña)
+        .then(function(){
+            verificarGmail();
+        })        
+        
+        .catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log(errorCode);
@@ -150,7 +155,15 @@ const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, c
     }
     return data;
 }
+function verificarGmail(){
+    var user = firebase.auth().currentUser;
 
+            user.sendEmailVerification().then(function() {
+                 // Email sent.
+            }).catch(function(error) {
+  // An error happened.
+            });
+}
 
 
 
