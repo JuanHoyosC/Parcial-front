@@ -1,18 +1,23 @@
-firebase.initializeApp({
+firebase.initializeApp({   
   apiKey: "AIzaSyBIWplHf1UW47MdtAxRq9sSm_OdxcQiKF4",
   authDomain: "parcial-db.firebaseapp.com",
-  projectId: "parcial-db"
+  databaseURL: "https://parcial-db.firebaseio.com",
+  projectId: "parcial-db",
+  storageBucket: "parcial-db.appspot.com",
+  messagingSenderId: "796397147936",
+  appId: "1:796397147936:web:15719d863544e4bae3a945",
+  measurementId: "G-5SPHRL79PH"
 });
 
 const db = firebase.firestore();
+var sw = false;
 
 const verificarEmpleado = (email, password) => {
    let verificar = false;
    let bloqueo = false
-  db.collection("empleados").onSnapshot((querySnapshot) => {
 
-    querySnapshot.forEach((doc) => {
-     
+  db.collection("empleados").onSnapshot((querySnapshot) => {
+    querySnapshot.forEach((doc) => {     
       if (email == doc.data().name && password == doc.data().contraseña && doc.data().estado == "activo") {
 
         localStorage.setItem('Nombre', doc.data().name);
@@ -80,9 +85,24 @@ const verificarEmpresa = (email, password) => {
 }
 
 const verificar = () => {
+  
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const empresa = document.querySelector("#gridRadios1").checked;
+  console.log(sw);
+  if(email.length == 0 || password.length == 0){
+    Swal.fire({
+      icon: 'error',
+      title: 'Campos vacios',
+      text: 'Intenta de nuevo',
+
+    })  
+  }else{
+    vedddrificar(email, password);    
+  }
+  console.log(sw);
+  if(sw == true){
+    console.log("-----------")
   if(empresa == true){
     verificarEmpresa(email, password);
     
@@ -90,38 +110,70 @@ const verificar = () => {
     verificarEmpleado(email, password);
   }
 }
+}
 
-const vedddrificar = () => {
-  const username = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+const vedddrificar = (username, password) => {
+  //const username = document.getElementById("email").value;
+  //const password = document.getElementById("password").value;
+  
 
 
   firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
     var errorCode = error.code;
     var errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+
+    if(errorCode == "auth/email-already-in-use"){
+      Swal.fire({
+          title: 'Espere',
+          text: "Correo electronico ya registrado",
+          icon: 'warning',        
+      })
+  }else{
+      if(errorCode == "auth/invalid-email"){
+          Swal.fire({
+              title: 'Espere',
+              text: "Correo electronico incorrecto",
+              icon: 'warning',            
+          })
+
+      }else{
+          if(errorCode == "auth/operation-not-allowed"){                        
+              Swal.fire({
+                  title: 'Espere',
+                  text: "Correo electronico inhabilitado",
+                  icon: 'warning',                
+              })
+          }else{
+              if(errorCode == "auth/weak-password"){
+                  Swal.fire({
+                      title: 'Espere',
+                      text: "Contraseña no es segura",
+                      icon: 'warning',
+          
+                  })
+              }
+          }
+      }    
+  }  
+
+
+
+
+
+
+
+
+
 
   });
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      firebase.auth().currentUser.getIdToken().then(function (idToken) {
-        localStorage.auth = idToken;
-        localStorage.uid = firebase.auth().currentUser.uid;
-
-        uid = firebase.auth().currentUser.uid;
-        firebase.database().ref("users/" + uid).update({
-          "name": $("#nameUser").val(),
-          "status": "0",
-          "uid": uid,
-          "challenge": false,
-          "statusChallenge": false
-        });
-      });
-      window.location = "html/empleados.html";
+      console.log("Inicio Seccion")
+      sw = true;     
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Usuario y/o contraseña son incorrectos',
-      });
+     
     }
   });
 
