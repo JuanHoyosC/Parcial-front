@@ -23,6 +23,7 @@ const obtenerDatos = () => {
     const numDocumento = document.getElementById("numDocumento").value;
     const nomEmpresa = document.getElementById("nomEmpresa").value;
     const telefono = document.getElementById("telefono").value;
+    
     let file = document.getElementById("file").files[0];
 
     
@@ -32,9 +33,8 @@ const obtenerDatos = () => {
 
 
 
-    if (email.length == 0 || password.length == 0 || name.length == 0 || tipo.length == 0 || numDocumento.length == 0 ||
+    if (email.length == 0 || contraseña.length == 0 || name.length == 0 || tipo.length == 0 || numDocumento.length == 0 ||
         nomEmpresa.length == 0 || telefono.length == 0 || !file) {
-
 
         Swal.fire({
             title: 'Informacion incompleta',
@@ -83,8 +83,7 @@ const obtenerDatos = () => {
                             })
                         }
                     }
-                }
-            }          
+                }           }          
             
         });
 
@@ -145,8 +144,8 @@ const arrayJson = (name, tipo, numDocumento, email, url, nomEmpresa, telefono, c
         url: url,
         nomEmpresa: nomEmpresa,
         telefono: telefono,
-        contraseña: contraseña
-        uid: uid;
+        contraseña: contraseña,
+        uid: uid
     }
     return data;
 }
