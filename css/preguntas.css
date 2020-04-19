@@ -14,8 +14,6 @@ body {
     height: 100vh;
     background: var(--background);
 }
-
-
 .container-preguntas {
     background: white;
     width: 750px;
@@ -25,7 +23,6 @@ body {
     box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
     overflow-y: scroll;
 }
-
 .title {
     margin-bottom: 32px;
 }

@@ -158,14 +158,6 @@ const vedddrificar = (username, password) => {
   }  
 
 
-
-
-
-
-
-
-
-
   });
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
