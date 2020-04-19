@@ -60,7 +60,7 @@ const verificarEmpresa = (email, password) => {
     querySnapshot.forEach((doc) => {
       if (email == doc.data().email && password == doc.data().contraseña) {
         localStorage.setItem('Nombre', doc.data().nomEmpresa);
-        localStorage.setItem('Id', doc.id);
+        localStorage.setItem('Id', doc.data().uid);
         localStorage.setItem('Url', doc.data().url);
         // limpia los inputs
         document.getElementById("email").value = "";

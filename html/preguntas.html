@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link  rel="icon"   href="../imagenes/icono.png" type="image/png" />
+
     <link rel="stylesheet" href="../css/preguntas.css">
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
     <title>Preguntas</title>
 </head>
 
@@ -18,18 +22,21 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
         <div class="" style="top: auto;" >
-          <a href="../index.html">
-          <img src="../../../assets/fontico.png" style="width: 180px;">
-          </a>
+            <a href="preguntas.html" style="text-decoration:none;">
+                <div class="" style="top: auto;">
+                  <img src="" id="img" class="imagen-empresa">
+                  <span id="nombre-empresa" class="text-white nombre-empresa ml-2"></span>
+                </div>
+              </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href=""> Login</a>
-          </li>
+            <li class="nav-item active">
+                <a class="nav-link text-white" href="../index.html"> Log out</a>
+              </li>
           
           </ul>
         </div>
@@ -37,87 +44,8 @@
     
 
 
-    <section class="container-preguntas">
+    <section class="container-preguntas ml-auto mr-auto" id ="preguntas" style="margin-bottom: 40px; margin-top: 40px">
         <h1 class="text-center text-secondary font-weight-lighter title">Preguntas</h1>
-
-        <div class="pregunta">
-            <p class="text-pregunta mb">lorem ipsum dolor sit amet consectetur adipiscing elit ?</p>
-            <form class="respuestas">
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 1
-                </div>
-                <div class="respuesta">
-                    <input type="radio"  name="exampleRadios" value="option2"> Respuesta 2
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 3
-                </div>
-            </form>
-        </div>
-
-        <div class="pregunta">
-            <p class="text-pregunta mb">lorem ipsum dolor sit amet consectetur adipiscing elit ?</p>
-            <form class="respuestas">
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 1
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 2
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 3
-                </div>
-            </form>
-        </div>
-
-        <div class="pregunta">
-            <p class="text-pregunta mb">lorem ipsum dolor sit amet consectetur adipiscing elit ?</p>
-            <form class="respuestas">
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 1
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 2
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 3
-                </div>
-            </form>
-        </div>
-
-        <div class="pregunta">
-            <p class="text-pregunta mb">lorem ipsum dolor sit amet consectetur adipiscing elit ?</p>
-            <form class="respuestas">
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 1
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 2
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 3
-                </div>
-            </form>
-        </div>
-
-        <div class="pregunta">
-            <p class="text-pregunta mb">lorem ipsum dolor sit amet consectetur adipiscing elit ?</p>
-            <form class="respuestas">
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 1
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 2
-                </div>
-                <div class="respuesta">
-                    <input type="radio" name="exampleRadios" value="option2"> Respuesta 3
-                </div>
-            </form>
-        </div>
-
-        <div class="container-button">
-            <a  class="btn-entrar text-center text-white" href = "resultado.html" >Continuar</a>
-        </div>
     </section>
 
     <footer class="footer mt-auto py-4 bg-dark text-light shadow">
@@ -138,12 +66,6 @@
         </footer>
 
 
-
-
-
-
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -155,6 +77,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+        <script src="../js/preguntas.js"></script>
 </body>
 
 </html>

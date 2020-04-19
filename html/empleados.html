@@ -24,9 +24,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
     <a href="empleados.html" style="text-decoration:none;">
       <div class="" style="top: auto;">
-        <img src=""  id ="img" class = "imagen-empresa">
-        <span id ="nombre-empresa" class ="text-white nombre-empresa ml-2"></span>
-  </div>
+        <img src="" id="img" class="imagen-empresa">
+        <span id="nombre-empresa" class="text-white nombre-empresa ml-2"></span>
+      </div>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,10 +35,82 @@
     <div class="collapse navbar-collapse" id="navbarText">
 
       <ul class="navbar-nav ml-auto">
-        <!-- Button trigger modal -->
+        <!--Model del registro de preguntas-->
+        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong1">Crear preguntas</a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ingrese 5 preguntas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                
+              </div>
+              <div class="modal-body">
+                <form class="form">
+                  <!--Pregunta 1-->
+                  <div class="row mb-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Pregunta 1" id="pregunta1">
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" placeholder="Valoración" id="valor1">
+                    </div>
+                  </div>
 
-          <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Registrar
-            operador</a>
+                  <!--Pregunta 2-->
+                  <div class="row mb-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Pregunta 2" id="pregunta2">
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" placeholder="Valoración" id="valor2">
+                    </div>
+                  </div>
+
+                  <!--Pregunta 3-->
+                  <div class="row mb-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Pregunta 3" id="pregunta3">
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" placeholder="Valoración" id="valor3">
+                    </div>
+                  </div>
+
+                  <!--Pregunta 4-->
+                  <div class="row mb-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Pregunta 4" id="pregunta4">
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" placeholder="Valoración" id="valor4">
+                    </div>
+                  </div>
+
+                  <!--Pregunta 5-->
+                  <div class="row mb-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Pregunta 5" id="pregunta5">
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" placeholder="Valoración" id="valor5">
+                    </div>
+                  </div>
+                  <input type ="button" class="btn btn-primary" onclick="crearPreguntas()" value ="Crear preguntas">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Model del registro de empleados-->
+
+        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Registrar
+          operador</a>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -62,8 +134,8 @@
 
                   <div class="form-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input"
-                        aria-describedby="inputGroupFileAddon01" accept="image/x-png,image/gif,image/jpeg" id = "file">
+                      <input type="file" class="custom-file-input" aria-describedby="inputGroupFileAddon01"
+                        accept="image/x-png,image/gif,image/jpeg" id="file">
                       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                     </div>
                   </div>
@@ -121,7 +193,7 @@
     </div>
   </footer>
 
- 
+
 
 
   <!-- Optional JavaScript -->
@@ -137,6 +209,7 @@
     crossorigin="anonymous"></script>
   <script src="../js/registroEmpleado.js"></script>
   <script src="../js/empleados.js"></script>
+  <script src="../js/registrarPreguntas.js"></script>
 </body>
 
 </html>
