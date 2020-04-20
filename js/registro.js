@@ -70,6 +70,10 @@ const obtenerDatos = () => {
                                             timer: 1500
                                         })
                                         limpiar();
+                                        setTimeout(function () {
+                                            window.location.href = "../index.html"; //will redirect to your blog page (an ex: blog.html)
+                                         }, 1000);
+                                       // window.location = "html/empleados.html";
 
                                     })
                                     .catch(function (error) {
