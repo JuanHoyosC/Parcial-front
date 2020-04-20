@@ -43,6 +43,7 @@ const crearPreguntas = () => {
                 }
              });
         });
+        
         var cat = localStorage.getItem('A')
         console.log(cat);
         if(cat == 2){           
