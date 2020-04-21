@@ -109,12 +109,16 @@
             </div>
           </div>
         </div>
-        <a class="nav-link text-white" href="empleados.html" >Empleados</a>
+       
+        <script> 
+          var a = localStorage.getItem('cont');
+          document.write("<a class='nav-link text-white' href='empleados.html' >Empleados <span class='badge badge-light'>"+a+"</span></a>") 
+        </script> 
 
         <!--Model del registro de empleados-->
 
         <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Registrar
-          operador</a>
+          operador   </a>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalLongTitle" aria-hidden="true">

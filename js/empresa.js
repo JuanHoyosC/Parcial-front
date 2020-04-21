@@ -25,6 +25,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
     });  
 
     document.getElementById("numero").innerHTML = "Numero de operadores: " + cont;
+    localStorage.setItem('cont',cont)
     
 });
 
