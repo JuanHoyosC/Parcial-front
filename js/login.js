@@ -197,10 +197,29 @@ const vedddrificar = (username, password) => {
 
 function PasswordReset(){
   var auth = firebase.auth();
-  var emailAddress = "user@example.com";
+  //var emailAddress = "user@example.com";
+  const emailAddress = document.getElementById("email2").value;
   auth.sendPasswordResetEmail(emailAddress).then(function() {
-    // Email sent.
+    Swal.fire(
+      'Correcto',
+      'se le ha enviado un correo',
+      'success'
+    )
   }).catch(function(error) {
     // An error happened.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    if(errorCode = "auth/user-not-found"){
+      Swal.fire({
+        title: 'Espere',
+        text: "Correo electronico no encontrado",
+        icon: 'warning',
+    })
+
+    }
+
   });
+  setTimeout('document.location.reload()',1500);
 }
