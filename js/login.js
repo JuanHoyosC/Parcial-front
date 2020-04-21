@@ -53,12 +53,14 @@ const verificarEmpleado = (email, password) => {
         text: 'No puede ingresar al sistema',
       })
     }else{
+      
       if (!verificar) {
+        /*
         Swal.fire({
           icon: 'error',
           title: 'Usuario o Contraseña incorrecta',
           text: 'Intenta de nuevo',
-        })
+        })*/
       }
     }
 
@@ -76,20 +78,22 @@ const verificarEmpresa = (email, password) => {
         // limpia los inputs
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
-        window.location = "html/empleados.html";
+        window.location = "html/empresa.html";
         verificar = true;
       }
 
     });
 
     if (!verificar) {
+     /* 
       Swal.fire({
         icon: 'error',
         title: 'Usuario o Contraseña incorrecta',
         text: 'Intenta de nuevo',
 
-      })
+      })*/
     }
+    
 
   });
 }

@@ -3,6 +3,7 @@
 if(localStorage.getItem('IdEmpresa') == null){
     window.location = "../../index.html";
 }
+var cont = 0;
   
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
@@ -14,6 +15,8 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
     }
     querySnapshot.forEach((doc) => {
         if (uidEmpresa == doc.data().uidEmpresa) {
+            cont = cont+1;
+
             // Se crean los div
             let info = document.createElement("div");
             let li = document.createElement("li");
@@ -103,8 +106,11 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
             // añade el elemento creado y su contenido al DOM 
             var currentDiv = document.getElementById("lista");
             currentDiv.appendChild(li);
+            
         }
+        
     });
+    console.log(cont);
 });
 
 const activar = (doc) => {
