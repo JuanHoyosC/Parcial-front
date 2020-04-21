@@ -11,15 +11,18 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="icon" href="../imagenes/icono.png" type="image/png" />
   <link rel="stylesheet" href="../css/empleados.css">
+  
 
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <title>Empleados</title>
 </head>
 
 <body>
+    
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
     <a href="empleados.html" style="text-decoration:none;">
@@ -163,12 +166,15 @@
   </nav>
 
 
-  <section class="main container">
+  <section class="main container center ">
     <h1 class="text-center text-secondary font-weight-lighter mb"> Informacion General</h1>    
-        <img src="" id="imgen" class="imagen-empresa">
+        <img src="" id="imgen" class="imagen-empresa" style="height: 180px; width: 180px;">
         <h2 id="nombre-empres"></h2>
-        <h4 id="numero"></h4>
-        <h4 id="email"></h4>
+        <h5 id="numero">Numero de operadores: </h5>
+        <h5 id="mail"></h5>
+        <h5 id="tel"></h5>
+        <h5 id="tipo"></h5>
+        
 
        
        
@@ -201,12 +207,9 @@
           <p class="mb-0">&copy; 2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
         </div>
       </div>
+
     </div>
   </footer>
-
-
-
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -223,6 +226,8 @@
   <script src="../js/registroEmpleado.js"></script>
   <script src="../js/registrarPreguntas.js"></script>
   <script src="../js/empresa.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
 </body>
 
 </html>

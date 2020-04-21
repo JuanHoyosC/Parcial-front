@@ -1,3 +1,6 @@
+
+  
+
 if(localStorage.getItem('IdEmpresa') == null){
     window.location = "../../index.html";
 }
@@ -8,30 +11,22 @@ document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
 document.getElementById("imgen").src = localStorage.getItem('Url');
 document.getElementById("nombre-empres").innerHTML = "Nombre empresa: " + localStorage.getItem('Nombre');
+document.getElementById("mail").innerHTML = "Email: " + localStorage.getItem('email');
+document.getElementById("tel").innerHTML = "Telefono: " + localStorage.getItem('Telefono');
+document.getElementById("tipo").innerHTML = "Documento: " + localStorage.getItem('doc');
+var b = "";
 db.collection("empleados").onSnapshot((querySnapshot) => {
     const uidEmpresa = localStorage.getItem('IdEmpresa');
-    var a = document.getElementById("lista");
-    
+    var a = document.getElementById("lista");    
     querySnapshot.forEach((doc) => {
         if (uidEmpresa == doc.data().uidEmpresa) {
             cont = cont +1;
         }        
-    });
-    db.collection("users").onSnapshot((querySnapshot) => {
-        const uidEmpresa = localStorage.getItem('IdEmpresa');               
-        querySnapshot.forEach((doc) => {
-            if (uidEmpresa == doc.data().uid) {
-                document.getElementById("email").innerHTML = "Email: " + doc.data().email;
-                              
+    });  
 
-            }      
-
-
-        });
+    document.getElementById("numero").innerHTML = "Numero de operadores: " + cont;
     
-    
-    });
-    console.log(cont);
-    document.getElementById("numero").innerHTML = "Numero de empleados: " + cont;
-
 });
+
+
+

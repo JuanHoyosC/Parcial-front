@@ -23,6 +23,16 @@ body {
     box-shadow: 10px 10px 12px rgba(0, 0, 0, 0.3);
     overflow-y: scroll;
 }
+.center{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    
+
+}
 
 .mb {
     margin-bottom: 32px;

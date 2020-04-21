@@ -75,6 +75,9 @@ const verificarEmpresa = (email, password) => {
         localStorage.setItem('Nombre', doc.data().nomEmpresa);
         localStorage.setItem('IdEmpresa', doc.data().uid);
         localStorage.setItem('Url', doc.data().url);
+        localStorage.setItem('email', email);
+        localStorage.setItem('Telefono', doc.data().telefono);
+        localStorage.setItem('doc', doc.data().tipo + " " +  doc.data().numDocumento )
         // limpia los inputs
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
