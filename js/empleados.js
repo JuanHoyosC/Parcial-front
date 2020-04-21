@@ -15,7 +15,6 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
     }
     querySnapshot.forEach((doc) => {
         if (uidEmpresa == doc.data().uidEmpresa) {
-            cont = cont+1;
 
             // Se crean los div
             let info = document.createElement("div");
@@ -76,12 +75,14 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                 bloquear.onclick = function () {
                     db.collection("empleados").doc(doc.id).update({
                         name: doc.data().name,
+                        email: doc.data().email,
                         url: doc.data().url,
                         direccion: doc.data().direccion,
                         contraseña: doc.data().contraseña,
-                        empresa: doc.data().empresa,
+                        uidEmpresa: doc.data().uidEmpresa,
+                        uidEmpleado: doc.data().uidEmpleado,
                         tipo: doc.data().tipo,
-                        estado: 'desactivado'
+                        estado: "desactivado"
                     }).then(() => {
                         bloquear.innerHTML = "Desbloquear";
                     })
@@ -95,7 +96,8 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                         url: doc.data().url,
                         direccion: doc.data().direccion,
                         contraseña: doc.data().contraseña,
-                        empresa: doc.data().empresa,
+                        uidEmpresa: doc.data().uidEmpresa,
+                        uidEmpleado: doc.data().uidEmpleado,
                         tipo: doc.data().tipo,
                         estado: "activo"
                     }).then(() => {
@@ -110,7 +112,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
         }
         
     });
-    console.log(cont);
+
 });
 
 const activar = (doc) => {
