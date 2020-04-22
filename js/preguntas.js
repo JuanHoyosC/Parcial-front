@@ -2,7 +2,7 @@ const preguntas = document.getElementById('preguntas');
 
 //Impide que entren a la pagina si no estan logueados
 if (localStorage.getItem('IdEmpresa') == null || localStorage.getItem('IdUser') == null) {
-  //window.location = "../../index.html";
+  window.location = "../../index.html";
 }
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');

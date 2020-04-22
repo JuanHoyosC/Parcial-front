@@ -65,7 +65,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
             if (doc.data().respondio == "true") {
                 pRespondio.innerHTML = "<span class='badge badge-success p-2'>Encuesta respondida</span>";
                 pRespondio.classList.add('info-empleado', 'text-success');
-                resultado.classList.add('btn', 'btn-success', 'ml-3');
+                resultado.classList.add('btn', 'btn-success', 'ml-3', 'mb-2');
                 resultado.innerHTML = "Ver respuestas";
                 resultado.setAttribute("data-toggle", "modal");
                 resultado.setAttribute("data-target", "#exampleModalCenter4")
@@ -79,11 +79,11 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                                 document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
                                 document.getElementById("pregunta44").innerText = "¿" + doc.data().pregunta4 + "?";
                                 document.getElementById("pregunta55").innerText = "¿" + doc.data().pregunta5 + "?";
-                              
-                                
-                           
-                           
-                           
+
+
+
+
+
                             }
 
                         })
@@ -111,40 +111,42 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                                 document.getElementById("respuesta4").innerText = doc1.data().respuesta4;
                                 document.getElementById("respuesta5").innerText = doc1.data().respuesta5;
 
-                                google.charts.load("current", {packages:['corechart']});
+                                google.charts.load("current", { packages: ['corechart'] });
                                 google.charts.setOnLoadCallback(drawChart);
                                 function drawChart() {
-                                  var data = google.visualization.arrayToDataTable([
-                                    ["Preguntas", "Valoracion", { role: "style" } ],
-                                    ["Pregunta 1", doc1.data().respuesta1, "color: #F18C5D"],
-                                    ["Pregunta 2", doc1.data().respuesta2, "silver"],
-                                    ["Pregunta 3", doc1.data().respuesta3, "#FA273F"],
-                                    ["Pregunta 4", doc1.data().respuesta4, "color: #3D99F6"],
-                                    ["Pregunta 5", doc1.data().respuesta5, "color: #64A5E6"],
-                                  ]);
-                            
-                                  var view = new google.visualization.DataView(data);
-                                  view.setColumns([0, 1,
-                                                   { calc: "stringify",
-                                                     sourceColumn: 1,
-                                                     type: "string",
-                                                     role: "annotation" },
-                                                   2]);
-                            
-                                  var options = {
-                                    title: "Grafica",
-                                    width: 500,
-                                    height: 300,
-                                    bar: {groupWidth: "95%"},
-                                    legend: { position: "none" },
-                                  };
-                                  var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-                                  chart.draw(view, options);
-                              }
-                                
+                                    var data = google.visualization.arrayToDataTable([
+                                        ["Preguntas", "Valoracion", { role: "style" }],
+                                        ["Pregunta 1", doc1.data().respuesta1, "color: #F18C5D"],
+                                        ["Pregunta 2", doc1.data().respuesta2, "silver"],
+                                        ["Pregunta 3", doc1.data().respuesta3, "#FA273F"],
+                                        ["Pregunta 4", doc1.data().respuesta4, "color: #3D99F6"],
+                                        ["Pregunta 5", doc1.data().respuesta5, "color: #64A5E6"],
+                                    ]);
+
+                                    var view = new google.visualization.DataView(data);
+                                    view.setColumns([0, 1,
+                                        {
+                                            calc: "stringify",
+                                            sourceColumn: 1,
+                                            type: "string",
+                                            role: "annotation"
+                                        },
+                                        2]);
+
+                                    var options = {
+                                        title: "Grafica",
+                                        width: 500,
+                                        height: 300,
+                                        bar: { groupWidth: "95%" },
+                                        legend: { position: "none" },
+                                    };
+                                    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                                    chart.draw(view, options);
+                                }
 
 
-                              grafica.innerHTML += `<div id="columnchart_values" ></div> ` 
+
+                                grafica.innerHTML += `<div id="columnchart_values" ></div> `
 
 
 
@@ -168,9 +170,9 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
             info.classList.add('col-8', 'col-lg-9', 'col-info');
             imagen.classList.add('col-4', 'col-lg-3', 'col-img', 'pl-0');
             img.classList.add('img-empleado');
-            editar.classList.add('btn', 'btn-warning', 'text-white');
-            eliminar.classList.add('btn', 'btn-danger', 'ml-3', 'text-white');
-            bloquear.classList.add('btn', 'btn-secondary', 'ml-3');
+            editar.classList.add('btn', 'btn-warning', 'text-white', 'mb-2');
+            eliminar.classList.add('btn', 'btn-danger', 'ml-3', 'text-white', 'mb-2');
+            bloquear.classList.add('btn', 'btn-secondary', 'ml-3', 'mb-2');
 
             //Funcion que se encarga de eliminar empleados
             eliminar.onclick = function () {
@@ -182,6 +184,17 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                         timer: 1500
                     })
                 })
+
+                db.collection("respuestas").onSnapshot((querySnapshot) => {
+                    querySnapshot.forEach((doc2) => {
+                        if (doc.data().uidEmpleado == doc2.data().uidEmpleado) {
+                            db.collection("respuestas").doc(doc2.id).delete().then(() => {
+
+                            })
+                        }
+                    })
+                });
+
             };
 
             editar.onclick = function () {
@@ -315,7 +328,7 @@ const borrarRespuesta = () => {
         tipo: tipo1,
         estado: estado1,
         respondio: "false"
-        
+
     }).then(() => {
         Swal.fire(
             'Correcto',

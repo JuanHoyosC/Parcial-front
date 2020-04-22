@@ -11,7 +11,7 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="icon" href="../imagenes/icono.png" type="image/png" />
   <link rel="stylesheet" href="../css/empleados.css">
-  
+
 
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    
+
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
     <a href="empleados.html" style="text-decoration:none;">
@@ -51,7 +51,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                
+
               </div>
               <div class="modal-body">
                 <form class="form">
@@ -60,18 +60,12 @@
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Pregunta 1" id="pregunta1">
                     </div>
-                    <div class="col">
-                      <input type="number" class="form-control" placeholder="Valoración" id="valor1">
-                    </div>
                   </div>
 
                   <!--Pregunta 2-->
                   <div class="row mb-3">
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Pregunta 2" id="pregunta2">
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" placeholder="Valoración" id="valor2">
                     </div>
                   </div>
 
@@ -80,18 +74,12 @@
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Pregunta 3" id="pregunta3">
                     </div>
-                    <div class="col">
-                      <input type="number" class="form-control" placeholder="Valoración" id="valor3">
-                    </div>
                   </div>
 
                   <!--Pregunta 4-->
                   <div class="row mb-3">
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Pregunta 4" id="pregunta4">
-                    </div>
-                    <div class="col">
-                      <input type="number" class="form-control" placeholder="Valoración" id="valor4">
                     </div>
                   </div>
 
@@ -100,23 +88,21 @@
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Pregunta 5" id="pregunta5">
                     </div>
-                    <div class="col">
-                      <input type="number" class="form-control" placeholder="Valoración" id="valor5">
-                    </div>
                   </div>
-                  <input type ="button" class="btn btn-primary" onclick="crearPreguntas()" value ="Crear preguntas">
+                  <input type="button" class="btn btn-primary" onclick="crearPreguntas()" value="Crear preguntas">
                 </form>
               </div>
             </div>
           </div>
         </div>
-       
-        <a class='nav-link text-white' href='empleados.html' >Empleados <span class='badge badge-light'><h7 id="contt"></h7></span></a>
+        <a class='nav-link text-white' href='empleados.html'>Empleados <span class='badge badge-light'>
+            <h7 id="contt"></h7>
+          </span></a>
 
         <!--Model del registro de empleados-->
 
         <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong">Registrar
-          operador   </a>
+          operador </a>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
           aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -147,16 +133,17 @@
                   </div>
 
                   <div class="form-group">
+                    <label class="text-secondary">Direccion</label>
                     <div class="row">
                       <div class="col">
                         <input type="number" class="form-control" placeholder="Carrera" id="carrera">
                       </div>
                       <div class="col">
-                        
+
                         <input type="number" class="form-control" placeholder="Calle" id="calle">
                       </div>
                       <div class="col">
-                        
+
                         <input type="number" class="form-control" placeholder="Número" id="numero">
                       </div>
                     </div>
@@ -186,8 +173,8 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body" id = "notificacion">
-  
+              <div class="modal-body" id="notificacion">
+
               </div>
             </div>
           </div>
@@ -201,33 +188,35 @@
 
 
   <section class="main container center ">
-    <h1 class="text-center text-secondary font-weight-lighter mb"> Informacion General</h1>    
-        <img src="" id="imgen" class="imagen-empresa" style="height: 180px; width: 180px;">
-        <h2 id="nombre-empres"></h2>
-        <h5 id="numero">Numero de operadores: </h5>
-        <h5 id="mail"></h5>
-        <h5 id="tel"></h5>
-        <h5 id="tipo"></h5>
-        <h5>Contraseña: **********</h5>
-        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg">Ver grafica general</button>
+    <h1 class="text-center text-secondary font-weight-lighter mb"> Informacion General</h1>
+    <img src="" id="imgen" class="imagen-empresa" style="height: 180px; width: 180px;">
+    <h2 id="nombre-empres"></h2>
+    <h5 id="numero">Numero de operadores: </h5>
+    <h5 id="mail"></h5>
+    <h5 id="tel"></h5>
+    <h5 id="tipo"></h5>
+    <h5>Contraseña: **********</h5>
+    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg">Ver
+      grafica general</button>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              
-            
-              <div id="grafG"></div>  
-              
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
 
 
-            </div>
-          </div>
+          <div id="grafG"></div>
+
+
+
         </div>
-        <div class="spinner-grow" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-        
-  
+      </div>
+    </div>
+    <div class="spinner-grow" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+
 
     </ul>
 
@@ -266,12 +255,12 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-    <script src = "https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"> </script>
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"> </script>
   <script src="../js/registroEmpleado.js"></script>
   <script src="../js/registrarPreguntas.js"></script>
   <script src="../js/empresa.js"></script>
   <script src="../js/notificaciones.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
 </body>
 
 </html>
