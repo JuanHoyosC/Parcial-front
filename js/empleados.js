@@ -3,6 +3,11 @@
 if (localStorage.getItem('IdEmpresa') == null) {
     window.location = "../../index.html";
 }
+
+if(localStorage.getItem('IdUser') != null){
+    window.location = "../html/preguntas.html";
+}
+
 grafica = document.getElementById("graf")
 
 //Variables que ayudan a actualizar empleados

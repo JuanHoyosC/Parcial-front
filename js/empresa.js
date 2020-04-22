@@ -1,9 +1,14 @@
 grafica = document.getElementById("grafG");
   
 
-if(localStorage.getItem('IdEmpresa') == null){
+if(localStorage.getItem('IdEmpresa') == null || localStorage.getItem('IdUser') != null){
     window.location = "../../index.html";
 }
+
+if(localStorage.getItem('IdUser') != null){
+    window.location = "../html/preguntas.html";
+}
+
 var cont = 0;
  
 document.getElementById("img").src = localStorage.getItem('Url');
