@@ -3,6 +3,8 @@
 if (localStorage.getItem('IdEmpresa') == null) {
     window.location = "../../index.html";
 }
+
+//Variables que ayudan a actualizar empleados
 var cont = 0;
 let tipo = "";
 let estado = "";
@@ -11,8 +13,22 @@ let idActualizar = ""
 let empresa = ""
 let respondio = ""
 let uidEmpre = ""
+let idRespuesta = ""
+
+//Variables que ayudan a eliminar respuestas
+let tipo1 = "";
+let estado1 = "";
+let url1 = ""
+let idActualizar1 = ""
+let empresa1 = ""
+let uidEmpre1 = ""
+let name1 = ""
+let direccion1 = ""
+let contraseña1 = ""
+
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
+
 db.collection("empleados").onSnapshot((querySnapshot) => {
     const uidEmpresa = localStorage.getItem('IdEmpresa');
     var a = document.getElementById("lista");
@@ -68,13 +84,25 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
 
                     db.collection("respuestas").onSnapshot((querySnapshot) => {
                         const Id = doc.data().uidEmpleado
-                        querySnapshot.forEach((doc) => {
-                            if (doc.data().uidEmpleado == Id) {
-                                document.getElementById("respuesta1").innerText = doc.data().respuesta1;
-                                document.getElementById("respuesta2").innerText = doc.data().respuesta2;
-                                document.getElementById("respuesta3").innerText = doc.data().respuesta3;
-                                document.getElementById("respuesta4").innerText = doc.data().respuesta4;
-                                document.getElementById("respuesta5").innerText = doc.data().respuesta5;
+                        querySnapshot.forEach((doc1) => {
+                            if (doc1.data().uidEmpleado == Id) {
+                                //Variables que ayudan a borrar las respuestas
+                                tipo1 = doc.data().tipo;
+                                estado1 = doc.data().estado;
+                                url1 = doc.data().url
+                                idActualizar1 = doc.id
+                                empresa1 = doc.data().uidEmpresa
+                                uidEmpre1 = doc.data().uidEmpleado
+                                name1 = doc.data().name
+                                contraseña1 = doc.data().contraseña
+                                direccion1 = doc.data().direccion
+                                idRespuesta = doc1.id
+                                //Muestra las respuestas
+                                document.getElementById("respuesta1").innerText = doc1.data().respuesta1;
+                                document.getElementById("respuesta2").innerText = doc1.data().respuesta2;
+                                document.getElementById("respuesta3").innerText = doc1.data().respuesta3;
+                                document.getElementById("respuesta4").innerText = doc1.data().respuesta4;
+                                document.getElementById("respuesta5").innerText = doc1.data().respuesta5;
                             }
                         })
                     });
@@ -216,7 +244,38 @@ const actualizar = () => {
                 'Correcto',
                 'Empleado actualizado',
                 'success'
-              )
+            )
         })
     }
+}
+
+const borrarRespuesta = () => {
+    db.collection("respuestas").doc(idRespuesta).delete().then(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Respuestas eliminadas satisfactoriamente',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        window.location = "empleados.html";
+    })
+
+    db.collection("empleados").doc(idActualizar1).update({
+        name: name1,
+        url: url1,
+        direccion: direccion1,
+        contraseña: contraseña1,
+        uidEmpresa: empresa1,
+        uidEmpleado: uidEmpre1,
+        tipo: tipo1,
+        estado: estado1,
+        respondio: "false"
+        
+    }).then(() => {
+        Swal.fire(
+            'Correcto',
+            'Empleado actualizado',
+            'success'
+        )
+    })
 }

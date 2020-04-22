@@ -60,7 +60,7 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
 
                 function drawChart() {
                   var data = google.visualization.arrayToDataTable([
-                    ['Year', 'Sales'],
+                    ['Year', 'Encuesta'],
                     ['Resultado 1', doc.data().respuesta1],
                     ['Resultado 2', doc.data().respuesta2],
                     ['Resultado 3', doc.data().respuesta3],
@@ -79,18 +79,7 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
                   chart.draw(data, options);
                 }
 
-
-
-
-
-
               }
-
-
-
-
-
-
 
             })
 
@@ -124,12 +113,15 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
 
 
         } else {
-          if (Uidempre == doc.data().uidEmpresa && doc.data().respondio == "false" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser) {
+          if (uidempre == doc.data().uidEmpresa && doc.data().respondio == "false" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser) {
             console.log("NO Respondio", doc.data().name);
+            db.collection("Preguntas").onSnapshot((querySnapshot) => {
+              const Id = localStorage.getItem('IdEmpresa');
+              const uidUser = localStorage.getItem('IdUser')
+              querySnapshot.forEach((doc) => {
 
-
-            if (Id == doc.data().uidEmpresa) {
-              preguntas.innerHTML += `
+                if (Id == doc.data().uidEmpresa) {
+                  preguntas.innerHTML += `
             <div class="pregunta mb-2">
             <p class="text-pregunta mb-2 ml-4">¿${doc.data().pregunta1}?</p>
             <form class="respuestas ml-5">
@@ -364,10 +356,11 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
             <input type ="button"  class="btn btn-primary" onclick ="responder()" value ="Finalizar" >
             </div>
             `
-            }
+                }
 
 
-
+              })
+            });
 
           }
 
@@ -459,6 +452,7 @@ const responder = () => {
           const data = arrayRespuestas(respuesta1, respuesta2, respuesta3, respuesta4, respuesta5, uidEmpresa, uidUser);
           db.collection("respuestas").add(data)
             .then(function (docRef) {
+              
               Swal.fire({
 
                 icon: 'success',
@@ -467,6 +461,7 @@ const responder = () => {
                 timer: 1500
 
               })
+              window.location = "preguntas.html";
 
             })
             .catch(function (error) {

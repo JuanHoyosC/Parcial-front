@@ -16,7 +16,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
-  
+  <script src="https://kit.fontawesome.com/5c6227773e.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <title>Empleados</title>
 </head>
@@ -159,6 +159,26 @@
             </div>
           </div>
         </div>
+
+        <!--Notificaciones-->
+        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModalLong6">Notificaciones</a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong6" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Notifiaciones</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id = "notificacion">
+  
+              </div>
+            </div>
+          </div>
+        </div>
         <li class="nav-item active">
           <a class="nav-link text-white" href="../index.html"> Log out</a>
         </li>
@@ -222,7 +242,7 @@
   <script src="../js/registroEmpleado.js"></script>
   <script src="../js/registrarPreguntas.js"></script>
   <script src="../js/empresa.js"></script>
-
+  <script src="../js/notificaciones.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
 </body>
 
