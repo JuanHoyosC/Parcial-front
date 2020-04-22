@@ -40,7 +40,7 @@ body {
 
 .img-empleado {
     width: 100%;
-    height: 128px;
+    height: 133px;
 }
 
 .imagen-empresa {
@@ -65,7 +65,7 @@ body {
 }
 
 .item-empleado {
-    height: 130px;
+    height: 135px;
     margin-bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }

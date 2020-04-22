@@ -37,7 +37,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
             pName.innerHTML = doc.data().name;
             pDIreccion.innerHTML = doc.data().direccion;
             if (doc.data().respondio == "true") {
-                pRespondio.innerHTML = "<span class='badge badge-success'>Encuesta respondida</span>";
+                pRespondio.innerHTML = "<span class='badge badge-success p-2'>Encuesta respondida</span>";
                 pRespondio.classList.add('info-empleado', 'text-success');
                 resultado.classList.add('btn', 'btn-success', 'ml-3');
                 resultado.innerHTML = "Ver respuestas";
@@ -48,7 +48,6 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                         const Id = localStorage.getItem('IdEmpresa');
                         querySnapshot.forEach((doc) => {
                             if(doc.data().uidEmpresa == Id){
-                                console.log("sdd")
                                 document.getElementById("pregunta11").innerText = "¿" + doc.data().pregunta1 + "?";
                                 document.getElementById("pregunta22").innerText = "¿" + doc.data().pregunta2 + "?";
                                 document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
@@ -72,7 +71,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                     });
                 }
             } else {
-                pRespondio.innerHTML = "<span class='badge badge-danger'>Aun no se responde la encuesta</span>";
+                pRespondio.innerHTML = "<span class='badge badge-danger p-2'>Aun no se responde la encuesta</span>";
                 pRespondio.classList.add('info-empleado', 'text-danger');
             }
 
