@@ -1,4 +1,6 @@
 
+
+
 * {
     box-sizing: border-box;
 }
@@ -102,5 +104,31 @@ body {
 
     .container-button {
         width: 70%;
+    }
+}
+@media (max-width: 993px) { 
+    .item-empleado {
+        height: 175px;
+        margin-bottom: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .btn{
+        font-size:10px;
+        width: 65px;
+    }
+
+    .btn-secondary{
+        margin-left: 2px !important;
+    }
+
+    .btn-success {
+        width: 100px !important;
+    }
+
+    .img-empleado{
+        
+        height: 173px;
+
     }
 }

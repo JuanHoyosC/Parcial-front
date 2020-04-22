@@ -18,6 +18,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
   <script src="https://kit.fontawesome.com/5c6227773e.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <title>Empleados</title>
 </head>
 
@@ -196,10 +197,25 @@
         <h5 id="tel"></h5>
         <h5 id="tipo"></h5>
         <h5>Contraseña: **********</h5>
+        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".bd-example-modal-lg">Ver grafica general</button>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              
+            
+              <div id="grafG"></div>  
+              
+
+
+            </div>
+          </div>
+        </div>
         <div class="spinner-grow" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-    <!-- <ul class="empleados mb  p-0" id="lista"></ul> -->
+        
+  
 
     </ul>
 

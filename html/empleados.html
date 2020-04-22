@@ -17,13 +17,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-
-
-  <!--Morris.js-->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <title>Empleados</title>
 </head>
 
@@ -161,7 +155,7 @@
   <!-- Modal -->
   <div class="modal fade bd-example-modal" id="exampleModalCenter4" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Respuestas</h5>
@@ -189,8 +183,13 @@
               <p></p>
               <input type="button" class ="btn btn-danger" value="Borrar respuesta" onclick = "borrarRespuesta()">
             </div>
-
+            <div class="col">
+             
+              <div id="graf"></div>
+ 
+           </div>
           </div>
+          
 
         </form>
 
@@ -265,7 +264,7 @@
         <div class="row mb-1">
           <div class="logo" style="top: auto;">
             <a href="index.html">
-              <img src="../../../assets/fontico.png" style="width: 180px;">
+              <img src="" style="width: 180px;">
             </a>
           </div>
         </div>

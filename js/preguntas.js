@@ -54,30 +54,37 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
 
 
 
-
-                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.load("current", {packages:['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
-
                 function drawChart() {
                   var data = google.visualization.arrayToDataTable([
-                    ['Year', 'Encuesta'],
-                    ['Resultado 1', doc.data().respuesta1],
-                    ['Resultado 2', doc.data().respuesta2],
-                    ['Resultado 3', doc.data().respuesta3],
-                    ['Resultado 4', doc.data().respuesta4],
-                    ['Resultado 5', doc.data().respuesta5]
+                    ["Preguntas", "Valoracion", { role: "style" } ],
+                    ["Pregunta 1", doc.data().respuesta1, "##F18C5D"],
+                    ["Pregunta 2", doc.data().respuesta2, "silver"],
+                    ["Pregunta 3", doc.data().respuesta3, "#FA273F"],
+                    ["Pregunta 4", doc.data().respuesta4, "color: #3D99F6"],
+                    ["Pregunta 5", doc.data().respuesta5, "color: #64A5E6"],
                   ]);
-
+            
+                  var view = new google.visualization.DataView(data);
+                  view.setColumns([0, 1,
+                                   { calc: "stringify",
+                                     sourceColumn: 1,
+                                     type: "string",
+                                     role: "annotation" },
+                                   2]);
+            
                   var options = {
-                    title: 'Respuestas',
-                    curveType: 'function',
-                    legend: { position: 'bottom' }
+                    title: "Grafica",
+                    width: 500,
+                    height: 300,
+                    bar: {groupWidth: "95%"},
+                    legend: { position: "none" },
                   };
-
-                  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-                  chart.draw(data, options);
-                }
+                  var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                  chart.draw(view, options);
+              }
+                
 
               }
 
@@ -105,7 +112,7 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
                 <p></p>
      
               </div>
-               <div id="curve_chart" style="width: 500px; height: 300px"></div>
+              <div id="columnchart_values" ></div>
               `
 
 

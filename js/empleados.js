@@ -3,6 +3,7 @@
 if (localStorage.getItem('IdEmpresa') == null) {
     window.location = "../../index.html";
 }
+grafica = document.getElementById("graf")
 
 //Variables que ayudan a actualizar empleados
 var cont = 0;
@@ -78,7 +79,13 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                                 document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
                                 document.getElementById("pregunta44").innerText = "¿" + doc.data().pregunta4 + "?";
                                 document.getElementById("pregunta55").innerText = "¿" + doc.data().pregunta5 + "?";
+                              
+                                
+                           
+                           
+                           
                             }
+
                         })
                     });
 
@@ -103,6 +110,44 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                                 document.getElementById("respuesta3").innerText = doc1.data().respuesta3;
                                 document.getElementById("respuesta4").innerText = doc1.data().respuesta4;
                                 document.getElementById("respuesta5").innerText = doc1.data().respuesta5;
+
+                                google.charts.load("current", {packages:['corechart']});
+                                google.charts.setOnLoadCallback(drawChart);
+                                function drawChart() {
+                                  var data = google.visualization.arrayToDataTable([
+                                    ["Preguntas", "Valoracion", { role: "style" } ],
+                                    ["Pregunta 1", doc1.data().respuesta1, "color: #F18C5D"],
+                                    ["Pregunta 2", doc1.data().respuesta2, "silver"],
+                                    ["Pregunta 3", doc1.data().respuesta3, "#FA273F"],
+                                    ["Pregunta 4", doc1.data().respuesta4, "color: #3D99F6"],
+                                    ["Pregunta 5", doc1.data().respuesta5, "color: #64A5E6"],
+                                  ]);
+                            
+                                  var view = new google.visualization.DataView(data);
+                                  view.setColumns([0, 1,
+                                                   { calc: "stringify",
+                                                     sourceColumn: 1,
+                                                     type: "string",
+                                                     role: "annotation" },
+                                                   2]);
+                            
+                                  var options = {
+                                    title: "Grafica",
+                                    width: 500,
+                                    height: 300,
+                                    bar: {groupWidth: "95%"},
+                                    legend: { position: "none" },
+                                  };
+                                  var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                                  chart.draw(view, options);
+                              }
+                                
+
+
+                              grafica.innerHTML += `<div id="columnchart_values" ></div> ` 
+
+
+
                             }
                         })
                     });

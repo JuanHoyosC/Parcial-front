@@ -175,6 +175,18 @@ const vedddrificar = (username, password) => {
                       icon: 'warning',
           
                   })
+              }else{
+                if(errorCode == "auth/user-not-found"){
+                  Swal.fire({
+                    title: 'Espere',
+                    text: "Cuenta no encontrada",
+                    icon: 'warning',
+        
+                })
+
+                }
+
+
               }
           }
       }    
