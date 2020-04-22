@@ -20,8 +20,114 @@ const storage = firebase.storage();
 
 db.collection("Preguntas").onSnapshot((querySnapshot) => {
   const Id = localStorage.getItem('IdEmpresa');
-
+  const uidUser = localStorage.getItem('IdUser')
   querySnapshot.forEach((doc) => {
+
+    const uidempre = doc.data().uidEmpresa;
+    db.collection("empleados").onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              if (uidempre ==doc.data().uidEmpresa&& doc.data().respondio == "true" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser) {
+                db.collection("Preguntas").onSnapshot((querySnapshot) => {
+                  const Id = localStorage.getItem('IdEmpresa');
+                  querySnapshot.forEach((doc) => {
+                      if(doc.data().uidEmpresa == Id){                          
+                          document.getElementById("pregunta11").innerText = "¿" + doc.data().pregunta1 + "?";
+                          document.getElementById("pregunta22").innerText = "¿" + doc.data().pregunta2 + "?";
+                          document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
+                          document.getElementById("pregunta44").innerText = "¿" + doc.data().pregunta4 + "?";
+                          document.getElementById("pregunta55").innerText = "¿" + doc.data().pregunta5 + "?";
+                      }
+                  })
+              });
+              
+
+                console.log("Respondio", doc.data().name);
+                db.collection("respuestas").onSnapshot((querySnapshot) => {
+                  const Id = doc.data().uidEmpleado
+                  querySnapshot.forEach((doc) => {
+                      if(doc.data().uidEmpleado == Id ){
+                          document.getElementById("respuesta1").innerText = doc.data().respuesta1;
+                          document.getElementById("respuesta2").innerText = doc.data().respuesta2;
+                          document.getElementById("respuesta3").innerText = doc.data().respuesta3;
+                          document.getElementById("respuesta4").innerText = doc.data().respuesta4;
+                          document.getElementById("respuesta5").innerText = doc.data().respuesta5;
+                        
+                      
+
+
+                          google.charts.load('current', {'packages':['corechart']});
+                          google.charts.setOnLoadCallback(drawChart);
+                    
+                          function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                              ['Year', 'Sales'],
+                              ['1',  doc.data().respuesta1],
+                              ['2',  doc.data().respuesta2],
+                              ['3',  doc.data().respuesta3],
+                              ['4',  doc.data().respuesta4],
+                              ['5',  doc.data().respuesta5]
+                            ]);
+                    
+                            var options = {
+                              title: 'Respuestas',
+                              curveType: 'function',
+                              legend: { position: 'bottom' }
+                            };
+                    
+                            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                    
+                            chart.draw(data, options);
+                          }  
+
+
+
+
+
+                    
+                  }
+                  
+
+
+
+
+
+                      
+                  })
+                  
+              });
+
+              
+
+                preguntas.innerHTML += `  <div class="col">
+                <span id ="pregunta11"></span>
+                <span id="respuesta1" class ="text-success"></span>
+                <p></p>
+                <span id ="pregunta22"></span>
+                <span id="respuesta2" class ="text-success"></span>
+                <p></p>
+                <span id ="pregunta33"></span>
+                <span id="respuesta3" class ="text-success"></span>
+                <p></p>
+                <span id ="pregunta44"></span>
+                <span id="respuesta4" class ="text-success"></span>
+                <p></p>
+                <span id ="pregunta55"></span>
+                <span id="respuesta5" class ="text-success"></span>
+                <p></p>
+     
+              </div>
+               <div id="curve_chart" style="width: 500px; height: 300px"></div>
+              `
+
+
+
+
+
+              }else{
+                if(doc.data().respondio == "false" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser){
+                  console.log("NO Respondio", doc.data().name);
+
+                  
     if (Id == doc.data().uidEmpresa) {
       preguntas.innerHTML += `
             <div class="pregunta mb-2">
@@ -258,7 +364,21 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
             <input type ="button"  class="btn btn-primary" onclick ="responder()" value ="Finalizar" >
             </div>
             `
-    }
+    }                  
+
+
+
+
+                }
+              
+                
+          
+              }
+
+            })
+          });   
+
+
   });
 });
 

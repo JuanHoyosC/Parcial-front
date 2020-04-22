@@ -16,14 +16,9 @@
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <!--Morris.js-->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>   
 
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <title>Preguntas</title>
 </head>
@@ -34,7 +29,7 @@
         <div class="" style="top: auto;" >
             <a href="preguntas.html" style="text-decoration:none;">
                 <div class="" style="top: auto;">
-                  <img src="" id="img" class="imagen-empresa">
+                  <img src="" id="img" class="imagen-empresa" style="width: 40px; height: 40px;">
                   <span id="nombre-empresa" class="text-white nombre-empresa ml-2"></span>
                 </div>
               </a>
@@ -54,36 +49,18 @@
     
 
 
-    <section class="container-preguntas ml-auto mr-auto" id ="preguntas" style="margin-bottom: 40px; margin-top: 40px">
+    <section class="container-preguntas ml-auto mr-auto" id ="preguantas" style="margin-bottom: 40px; margin-top: 40px">
         <h1 class="text-center text-secondary font-weight-lighter title">Preguntas</h1>
+        <div id="preguntas" ></div>
         
-        <div id="myfirstchart" style="height: 250px;"></div>
+        
         
     </section>
-    <script>
-      new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'myfirstchart',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [
-    { year: '2008', value: 20 },
-    { year: '2009', value: 10 },
-    { year: '2010', value: 5 },
-    { year: '2011', value: 5 },
-    { year: '2012', value: 20 }
-  ],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'year',
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['value'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['Value']
-});
-
-
+    <script type="text/javascript">
+  
     </script>
+  
+   
 
     <footer class="footer mt-auto py-4 bg-dark text-light shadow">
         <div class="container">
@@ -91,7 +68,7 @@
             <div class="row mb-1">
               <div class="logo" style="top: auto;" >
                 <a href="index.html">
-                <img src="../../../assets/fontico.png" style="width: 180px;" >
+                <img src="" style="width: 180px;" >
                 </a>
               </div>
               </div>            

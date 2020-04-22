@@ -16,6 +16,14 @@
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-storage.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+
+      <!--Morris.js-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <title>Empleados</title>
 </head>
 
@@ -151,8 +159,8 @@
 
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal fade bd-example-modal-xl" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">Respuestas</h5>
@@ -160,8 +168,9 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-         <form class = "form">
+        <form class="container">
+        <div class="modal-body row ">
+         <div class="col">
            <span id ="pregunta11"></span>
            <span id="respuesta1" class ="text-success"></span>
            <p></p>
@@ -178,21 +187,41 @@
            <span id="respuesta5" class ="text-success"></span>
            <p></p>
 
-         </form>
+         </div>
+         <div class="col">
+          <div id="myfirstchart" style="height: 50px;"></div>
+         
+
         </div>
+
+        </div>
+        
+      </form>
         
       </div>
     </div>
   </div>
+   
 
   <section class="main container">
     <h1 class="text-center text-secondary font-weight-lighter mb"> Lista de empleados</h1>
 
     <ul class="empleados mb  p-0" id="lista"></ul>
 
-    </ul>
+        
+    </section>
 
-  </section>
+
+  
+
+
+
+
+
+
+
+
+
   <br>
   <br>
 
