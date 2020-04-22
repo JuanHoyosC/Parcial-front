@@ -475,12 +475,7 @@ const responder = () => {
               console.error("Error adding document: ", error);
             });
         } else {
-          Swal.fire({
-            title: 'Ya respondio la encuesta',
-            text: "Encuesta respondida con anterioridad",
-            icon: 'warning',
 
-          })
         }
 
       });
