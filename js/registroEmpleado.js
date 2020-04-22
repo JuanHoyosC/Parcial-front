@@ -20,11 +20,13 @@ const obtenerDatos = () => {
     const contraseña = document.getElementById("passwordEmpleado").value;
     const name = document.getElementById("nameEmpleado").value;
     const email = document.getElementById("email").value;
-    const direccion = document.getElementById("direccion").value;
+    const carrera = document.getElementById("carrera").value;
+    const calle = document.getElementById("calle").value;
+    const numero = document.getElementById("numero").value;
     let file = document.getElementById("file").files[0];
 
-
-    if (direccion.length == 0 || contraseña.length == 0 || name.length == 0 || !file || email.length == 0) {
+    
+    if (calle.length == 0 || numero.length == 0 || carrera.length == 0 || contraseña.length == 0 || name.length == 0 || !file || email.length == 0) {
 
         Swal.fire({
             title: 'Informacion incompleta',
@@ -33,6 +35,7 @@ const obtenerDatos = () => {
 
         })
     } else {
+        const direccion = "Carrera " + carrera + " con calle " + calle +"-" +numero;
         firebase.auth().createUserWithEmailAndPassword(email, contraseña)
             .then(function () {
                 VerificarGmail();
