@@ -4,7 +4,13 @@ if (localStorage.getItem('IdEmpresa') == null) {
     window.location = "../../index.html";
 }
 var cont = 0;
-
+let tipo = "";
+let estado = "";
+let url = ""
+let idActualizar = ""
+let empresa = ""
+let respondio = ""
+let uidEmpre = ""
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
 db.collection("empleados").onSnapshot((querySnapshot) => {
@@ -33,6 +39,9 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
 
             pName.classList.add('info-empleado');
             pDIreccion.classList.add('info-empleado');
+            //Atributos para el boton editar
+            editar.setAttribute('data-toggle', 'modal')
+            editar.setAttribute('data-target', '#exampleModalCenter7');
             //Se añade el contenido a las etiquetas p
             pName.innerHTML = doc.data().name;
             pDIreccion.innerHTML = doc.data().direccion;
@@ -47,7 +56,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                     db.collection("Preguntas").onSnapshot((querySnapshot) => {
                         const Id = localStorage.getItem('IdEmpresa');
                         querySnapshot.forEach((doc) => {
-                            if(doc.data().uidEmpresa == Id){
+                            if (doc.data().uidEmpresa == Id) {
                                 document.getElementById("pregunta11").innerText = "¿" + doc.data().pregunta1 + "?";
                                 document.getElementById("pregunta22").innerText = "¿" + doc.data().pregunta2 + "?";
                                 document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
@@ -60,7 +69,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                     db.collection("respuestas").onSnapshot((querySnapshot) => {
                         const Id = doc.data().uidEmpleado
                         querySnapshot.forEach((doc) => {
-                            if(doc.data().uidEmpleado == Id){
+                            if (doc.data().uidEmpleado == Id) {
                                 document.getElementById("respuesta1").innerText = doc.data().respuesta1;
                                 document.getElementById("respuesta2").innerText = doc.data().respuesta2;
                                 document.getElementById("respuesta3").innerText = doc.data().respuesta3;
@@ -100,6 +109,20 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                         timer: 1500
                     })
                 })
+            };
+
+            editar.onclick = function () {
+                document.getElementById("nameEmpleado2").value = doc.data().name
+                document.getElementById("email2").value = doc.data().email
+                document.getElementById("direccion2").value = doc.data().direccion
+                document.getElementById("passwordEmpleado2").value = doc.data().contraseña
+                tipo = doc.data().tipo
+                estado = doc.data().estado
+                url = doc.data().url
+                idActualizar = doc.id
+                empresa = doc.data().uidEmpresa
+                uidEmpre = doc.data().uidEmpleado
+                respondio = doc.data().respondio
             };
 
             //Funcion que se encargara de editar los empleados
@@ -165,3 +188,35 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
 
 });
 
+const actualizar = () => {
+    const name = document.getElementById("nameEmpleado2").value;
+    const email = document.getElementById("email2").value;
+    const direccion = document.getElementById("direccion2").value;
+    const contraseña = document.getElementById("passwordEmpleado2").value;
+    if (direccion.length == 0 || contraseña.length == 0 || name.length == 0 || email.length == 0) {
+        Swal.fire({
+            title: 'Espere',
+            text: "No debe dejar el campo vacio",
+            icon: 'warning',
+
+        })
+    } else {
+        db.collection("empleados").doc(idActualizar).update({
+            name: name,
+            url: url,
+            direccion: direccion,
+            contraseña: contraseña,
+            uidEmpresa: empresa,
+            uidEmpleado: uidEmpre,
+            tipo: tipo,
+            estado: estado,
+            respondio: respondio
+        }).then(() => {
+            Swal.fire(
+                'Correcto',
+                'Empleado actualizado',
+                'success'
+              )
+        })
+    }
+}

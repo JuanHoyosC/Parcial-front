@@ -25,80 +25,80 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
 
     const uidempre = doc.data().uidEmpresa;
     db.collection("empleados").onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (uidempre == doc.data().uidEmpresa && doc.data().respondio == "true" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser) {
+          db.collection("Preguntas").onSnapshot((querySnapshot) => {
+            const Id = localStorage.getItem('IdEmpresa');
             querySnapshot.forEach((doc) => {
-              if (uidempre ==doc.data().uidEmpresa&& doc.data().respondio == "true" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser) {
-                db.collection("Preguntas").onSnapshot((querySnapshot) => {
-                  const Id = localStorage.getItem('IdEmpresa');
-                  querySnapshot.forEach((doc) => {
-                      if(doc.data().uidEmpresa == Id){                          
-                          document.getElementById("pregunta11").innerText = "¿" + doc.data().pregunta1 + "?";
-                          document.getElementById("pregunta22").innerText = "¿" + doc.data().pregunta2 + "?";
-                          document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
-                          document.getElementById("pregunta44").innerText = "¿" + doc.data().pregunta4 + "?";
-                          document.getElementById("pregunta55").innerText = "¿" + doc.data().pregunta5 + "?";
-                      }
-                  })
-              });
-              
-
-                console.log("Respondio", doc.data().name);
-                db.collection("respuestas").onSnapshot((querySnapshot) => {
-                  const Id = doc.data().uidEmpleado
-                  querySnapshot.forEach((doc) => {
-                      if(doc.data().uidEmpleado == Id ){
-                          document.getElementById("respuesta1").innerText = doc.data().respuesta1;
-                          document.getElementById("respuesta2").innerText = doc.data().respuesta2;
-                          document.getElementById("respuesta3").innerText = doc.data().respuesta3;
-                          document.getElementById("respuesta4").innerText = doc.data().respuesta4;
-                          document.getElementById("respuesta5").innerText = doc.data().respuesta5;
-                        
-                      
+              if (doc.data().uidEmpresa == Id) {
+                document.getElementById("pregunta11").innerText = "¿" + doc.data().pregunta1 + "?";
+                document.getElementById("pregunta22").innerText = "¿" + doc.data().pregunta2 + "?";
+                document.getElementById("pregunta33").innerText = "¿" + doc.data().pregunta3 + "?";
+                document.getElementById("pregunta44").innerText = "¿" + doc.data().pregunta4 + "?";
+                document.getElementById("pregunta55").innerText = "¿" + doc.data().pregunta5 + "?";
+              }
+            })
+          });
 
 
-                          google.charts.load('current', {'packages':['corechart']});
-                          google.charts.setOnLoadCallback(drawChart);
-                    
-                          function drawChart() {
-                            var data = google.visualization.arrayToDataTable([
-                              ['Year', 'Sales'],
-                              ['1',  doc.data().respuesta1],
-                              ['2',  doc.data().respuesta2],
-                              ['3',  doc.data().respuesta3],
-                              ['4',  doc.data().respuesta4],
-                              ['5',  doc.data().respuesta5]
-                            ]);
-                    
-                            var options = {
-                              title: 'Respuestas',
-                              curveType: 'function',
-                              legend: { position: 'bottom' }
-                            };
-                    
-                            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-                    
-                            chart.draw(data, options);
-                          }  
+          console.log("Respondio", doc.data().name);
+          db.collection("respuestas").onSnapshot((querySnapshot) => {
+            const Id = doc.data().uidEmpleado
+            querySnapshot.forEach((doc) => {
+              if (doc.data().uidEmpleado == Id) {
+                document.getElementById("respuesta1").innerText = doc.data().respuesta1;
+                document.getElementById("respuesta2").innerText = doc.data().respuesta2;
+                document.getElementById("respuesta3").innerText = doc.data().respuesta3;
+                document.getElementById("respuesta4").innerText = doc.data().respuesta4;
+                document.getElementById("respuesta5").innerText = doc.data().respuesta5;
+
+
+
+
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                  var data = google.visualization.arrayToDataTable([
+                    ['Year', 'Sales'],
+                    ['Resultado 1', doc.data().respuesta1],
+                    ['Resultado 2', doc.data().respuesta2],
+                    ['Resultado 3', doc.data().respuesta3],
+                    ['Resultado 4', doc.data().respuesta4],
+                    ['Resultado 5', doc.data().respuesta5]
+                  ]);
+
+                  var options = {
+                    title: 'Respuestas',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                  };
+
+                  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                  chart.draw(data, options);
+                }
 
 
 
 
 
-                    
-                  }
-                  
+
+              }
 
 
 
 
 
-                      
-                  })
-                  
-              });
 
-              
 
-                preguntas.innerHTML += `  <div class="col">
+            })
+
+          });
+
+
+
+          preguntas.innerHTML += `  <div class="col">
                 <span id ="pregunta11"></span>
                 <span id="respuesta1" class ="text-success"></span>
                 <p></p>
@@ -123,13 +123,13 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
 
 
 
-              }else{
-                if(doc.data().respondio == "false" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser){
-                  console.log("NO Respondio", doc.data().name);
+        } else {
+          if (Uidempre == doc.data().uidEmpresa && doc.data().respondio == "false" && Id == doc.data().uidEmpresa && doc.data().uidEmpleado == uidUser) {
+            console.log("NO Respondio", doc.data().name);
 
-                  
-    if (Id == doc.data().uidEmpresa) {
-      preguntas.innerHTML += `
+
+            if (Id == doc.data().uidEmpresa) {
+              preguntas.innerHTML += `
             <div class="pregunta mb-2">
             <p class="text-pregunta mb-2 ml-4">¿${doc.data().pregunta1}?</p>
             <form class="respuestas ml-5">
@@ -364,19 +364,19 @@ db.collection("Preguntas").onSnapshot((querySnapshot) => {
             <input type ="button"  class="btn btn-primary" onclick ="responder()" value ="Finalizar" >
             </div>
             `
-    }                  
+            }
 
 
 
 
-                }
-              
-                
-          
-              }
+          }
 
-            })
-          });   
+
+
+        }
+
+      })
+    });
 
 
   });
@@ -506,18 +506,3 @@ const arrayRespuestas = (respuesta1, respuesta2, respuesta3, respuesta4, respues
   return data;
 }
 
-const activar = (doc) => {
-  console.log("Activar")
-  db.collection("empleados").doc(doc.id).update({
-    name: doc.data().name,
-    url: doc.data().url,
-    direccion: doc.data().direccion,
-    contraseña: doc.data().contraseña,
-    empresa: doc.data().empresa,
-    tipo: doc.data().tipo,
-    estado: 'activo'
-  }).then(() => {
-
-  })
-
-}

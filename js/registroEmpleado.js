@@ -24,7 +24,7 @@ const obtenerDatos = () => {
     let file = document.getElementById("file").files[0];
 
 
-    if (direccion.length == 0 || contraseña.length == 0 || name.length == 0 || !file) {
+    if (direccion.length == 0 || contraseña.length == 0 || name.length == 0 || !file || email.length == 0) {
 
         Swal.fire({
             title: 'Informacion incompleta',
