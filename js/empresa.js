@@ -5,7 +5,6 @@ if(localStorage.getItem('IdEmpresa') == null){
     window.location = "../../index.html";
 }
 var cont = 0;
-
  
 document.getElementById("img").src = localStorage.getItem('Url');
 document.getElementById("nombre-empresa").innerHTML = localStorage.getItem('Nombre');
@@ -26,6 +25,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
 
     document.getElementById("numero").innerHTML = "Numero de operadores: " + cont;
     localStorage.setItem('cont',cont)
+    document.getElementById("contt").innerHTML = cont;
     
 });
 

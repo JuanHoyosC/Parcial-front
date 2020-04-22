@@ -37,7 +37,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
             pName.innerHTML = doc.data().name;
             pDIreccion.innerHTML = doc.data().direccion;
             if (doc.data().respondio == "true") {
-                pRespondio.innerHTML = "Encuesta respondida";
+                pRespondio.innerHTML = "<span class='badge badge-success'>Encuesta respondida</span>";
                 pRespondio.classList.add('info-empleado', 'text-success');
                 resultado.classList.add('btn', 'btn-success', 'ml-3');
                 resultado.innerHTML = "Ver respuestas";
@@ -72,7 +72,7 @@ db.collection("empleados").onSnapshot((querySnapshot) => {
                     });
                 }
             } else {
-                pRespondio.innerHTML = "Aún no responde la encuesta";
+                pRespondio.innerHTML = "<span class='badge badge-danger'>Aun no se responde la encuesta</span>";
                 pRespondio.classList.add('info-empleado', 'text-danger');
             }
 
